@@ -1,5 +1,7 @@
 //go:build ignore
 
+// See Upstream docs for more details: https://entgo.io/docs/code-gen/#use-entc-as-a-package
+
 package main
 
 import (
@@ -31,16 +33,14 @@ func main() {
 	opts := []entc.Option{
 		entc.Extensions(
 			gqlExt,
-			entviz.Extension{}, // graph visualisation
+			entviz.Extension{}, // graph visualization
 		),
-		// entc.TemplateDir("./internal/ent/templates"),
-		// entc.FeatureNames("intercept"),
 	}
 
 	if err := entc.Generate("./internal/ent/schema", &gen.Config{
 		Target:   "./internal/ent/generated",
-		Package:  "github.com/datumforge/go-template/internal/ent/generated",
 		Features: []gen.Feature{gen.FeatureVersionedMigration},
+		Package:  "github.com/datumforge/go-template/internal/ent/generated",
 	}, opts...); err != nil {
 		log.Fatalf("running ent codegen: %v", err)
 	}

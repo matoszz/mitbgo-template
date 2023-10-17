@@ -15,7 +15,22 @@ test:
 	go test -v ./...
 
 generate:
-	$(info ******************** generating ent schema ********************)
+	@echo "******************** generating ent schema ********************"
 	go mod tidy
-	go generate ./..
-	
+	go generate ./...
+	go mod tidy
+	@echo "******************** generating gqlgen ********************"
+	go run github.com/99designs/gqlgen generate --verbose
+	go mod tidy
+	go run ./gen_schema.go
+	@echo "******************* generating gqlgen client ********************)"
+	go run github.com/Yamashou/gqlgenc generate --configdir schema
+
+clean:
+	$(info ******************** removing generated files from repo ********************)
+	rm -rf internal/ent/generated/
+	rm -rf internal/api/*.go
+	rm -rf internal/ent/schema/*.go
+	rm -f schema/ent.graphql
+	rm -f schema.graphql
+	rm -rf internal/testclient/
