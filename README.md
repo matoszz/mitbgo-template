@@ -25,6 +25,7 @@ func (User) Fields() []ent.Field {
 ```bash
 make generate
 ```
+1. Uncomment code in `cmd/serve.go`
 
 
 ## References
