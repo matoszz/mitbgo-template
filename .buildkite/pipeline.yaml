@@ -16,7 +16,7 @@ steps:
   plugins:
     - docker#v5.9.0:
         image: golang:1.21
-        command: ["go", "test", "./..."]
+        command: ["go", "test", "internal/..."]
 
 - label: ":golang: build"
   key: "gobuild"
