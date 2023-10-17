@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - serve
+      - --development
+    ports:
+      - "17608:17608"
+    restart: unless-stopped
+    networks:
+      - go-service
