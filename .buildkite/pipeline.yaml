@@ -1,6 +1,6 @@
 env:
   APP_NAME: ${BUILDKITE_PIPELINE_SLUG}
-  IMAGE_REPO: us-docker.pkg.dev/datum/${APP_NAME}
+  IMAGE_REPO: ghcr.io/datumforge/${APP_NAME}
   IMAGE_TAG: ${BUILDKITE_BUILD_NUMBER}-${BUILDKITE_COMMIT:0:8}
 
 steps:
