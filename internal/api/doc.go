@@ -1,2 +1,2 @@
-// package api is the graphapi package
+// Package api is the graphapi package
 package api

@@ -27,6 +27,10 @@ make generate
 ```
 1. Uncomment code in `cmd/serve.go`
 
+If for any reason you want to remove all the generated code, you can run:
+`make clean`
+
+You will need `setopt extendedglob` enabled, and this was only tested with `zsh`, sorries. 
 
 ## References
 
