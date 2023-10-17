@@ -8,15 +8,30 @@ import (
 	"log"
 	"os"
 
+	"ariga.io/ogent"
 	"entgo.io/contrib/entgql"
+	"entgo.io/contrib/entoas"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
 	"github.com/hedwigz/entviz"
+	"github.com/ogen-go/ogen"
 )
 
 func main() {
 	// Ensure the schema directory exists before running entc.
 	_ = os.Mkdir("schema", 0755)
+
+	// Add OpenAPI Gen extension
+	spec := new(ogen.Spec)
+	oas, err := entoas.NewExtension(entoas.Spec(spec))
+	if err != nil {
+		log.Fatalf("creating entoas extension: %v", err)
+	}
+
+	ogent, err := ogent.NewExtension(spec)
+	if err != nil {
+		log.Fatalf("creating ogent extension: %v", err)
+	}
 
 	gqlExt, err := entgql.NewExtension(
 		// Tell Ent to generate a GraphQL schema for
@@ -34,6 +49,8 @@ func main() {
 		entc.Extensions(
 			gqlExt,
 			entviz.Extension{}, // graph visualization
+			oas,
+			ogent,
 		),
 	}
 
