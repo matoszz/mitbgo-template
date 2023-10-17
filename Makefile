@@ -12,7 +12,7 @@ lint:
 
 test: 
 	$(info ******************** running tests ********************)
-	go test -v internal/...
+	go test -v ./...
 
 generate:
 	@echo "******************** generating ent schema ********************"

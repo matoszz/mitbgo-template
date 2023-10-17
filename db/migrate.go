@@ -1,3 +1,5 @@
+//go:build ignore
+
 // Package db provides an embedded filesystem containing all the database migrations
 package db
 
