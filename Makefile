@@ -30,7 +30,6 @@ clean:
 	$(info ******************** removing generated files from repo ********************)
 	rm -rf internal/ent/generated/^doc.go
 	rm -rf internal/api/^doc.go
-	rm -rf internal/ent/schema/*.go
 	rm -f schema/ent.graphql
 	rm -f schema.graphql
 	rm -rf internal/testclient/
