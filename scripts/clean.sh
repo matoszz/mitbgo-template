@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -ueo pipefail
 # Find all occurances of `go-template` and its variations and replace with current directory name
 appName=go-template
 appVariation=${appName/"-"/""}
