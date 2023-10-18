@@ -10,6 +10,13 @@ This repo contains the basis for generating an opinionated Graph API using:
 1. [gqlgen](https://gqlgen.com/) - Code generation from schema definitions
 1. [openfga](https://openfga.dev/) - Authorization 
 
+## Prerequisites
+
+1. [gotemplate cli](https://docs.gomplate.ca/installing/)
+```
+brew install gomplate
+```
+
 ## Usage
 
 ### Cleanup 
@@ -128,7 +135,11 @@ schema
 └── organization.graphql
 └── member.graphql
 ```
-8. For a simple User, this might look something like :
+To have the files auto generated, use:
+```bash
+make graph
+```
+9. For a simple User, this might look something like :
 ```go
 // Fields of the User.
 func (User) Fields() []ent.Field {
@@ -148,7 +159,7 @@ func (User) Edges() []ent.Edge {
 func (User) Annotations() []schema.Annotation {
 	return []schema.Annotation{
 		entgql.QueryField(),
-		entgql.Mutations(entgql.MutationCreate()),
+		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
 	}
 }
 ```

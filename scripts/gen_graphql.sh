@@ -25,7 +25,7 @@ do
         export object="${first}${second}"
 
         # Generate a base graphql schema
-        gomplate -f scripts/graph.tpl > $graphSchemaDir/$schema.graphql
+        gomplate -f scripts/templates/graph.tpl > $graphSchemaDir/$schema.graphql
 
         echo +++ file created $graphSchemaDir/$schema.graphql
     fi

@@ -20,6 +20,10 @@ ent:
 	go generate ./...
 	go mod tidy
 
+graph:
+	@echo "******************** generating graph schema ********************"
+	bash scripts/gen_graphql.sh
+
 gqlgen:
 	@echo "******************** generating gqlgen ********************"
 	go run github.com/99designs/gqlgen generate --verbose
@@ -28,7 +32,7 @@ gqlgen:
 	@echo "******************* generating gqlgen client ********************)"
 	go run github.com/Yamashou/gqlgenc generate --configdir schema
 
-generate: ent gqlgen
+generate: ent graph gqlgen
 
 run-dev:
 	go run main.go serve  --debug --pretty --dev
