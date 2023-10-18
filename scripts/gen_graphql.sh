@@ -14,6 +14,7 @@ do
     if [ -f "$graphSchemaDir/$schema.graphql" ]
     then
         echo "$graphSchemaDir/$schema.graphql already exists, not regenerating."
+        exit 1
     else
 
         touch $graphSchemaDir/$schema.graphql
