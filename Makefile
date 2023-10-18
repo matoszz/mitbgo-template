@@ -29,13 +29,17 @@ gqlgen:
 	go run github.com/99designs/gqlgen generate --verbose
 	go mod tidy
 	go run ./gen_schema.go
-	@echo "******************* generating gqlgen client ********************)"
+	@echo "******************* generating gqlgen client ********************"
 	go run github.com/Yamashou/gqlgenc generate --configdir schema
 
 generate: ent graph gqlgen
 
 run-dev:
 	go run main.go serve  --debug --pretty --dev
+
+setup-template:
+	@echo "******************** removing template name occurances ********************"
+	bash scripts/clean.sh
 
 clean:
 	$(info ******************** removing generated files from repo ********************)
