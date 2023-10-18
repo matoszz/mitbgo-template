@@ -29,7 +29,7 @@ steps:
           - GOOS=linux
         command: ["go", "build", "-buildvcs=false", "-mod=mod", "-a", "-o", "bin/$APP_NAME"]
 
-# TODO (sfunk): Setup Secrets + gcloud cli on buildkite runners
+# TODO Setup Secrets + gcloud cli on buildkite runners
 # - label: ":docker: docker build and publish"
 #   key: "build"
 #   depends_on: ["lint", "test", "gobuild"]
