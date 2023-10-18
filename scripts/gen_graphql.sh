@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -ueo pipefail
 # Get all generated schema files from ent
 repoRoot=$(git rev-parse --show-toplevel)
 entSchemaDir=$repoRoot/internal/ent/schema
