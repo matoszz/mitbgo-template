@@ -10,6 +10,13 @@ This repo contains the basis for generating an opinionated Graph API using:
 1. [gqlgen](https://gqlgen.com/) - Code generation from schema definitions
 1. [openfga](https://openfga.dev/) - Authorization 
 
+## Prerequisites
+
+1. [gotemplate cli](https://docs.gomplate.ca/installing/)
+```
+brew install gomplate
+```
+
 ## Usage
 
 ### Cleanup 
@@ -35,6 +42,32 @@ internal/ent/schema
 └── member.go
 ```
 4. You will add your fields, edges, annotations, etc to this file for each schema. See the [ent schema def docs](https://entgo.io/docs/schema-def) for more details. 
+
+5. For a simple User, this might look something like :
+```go
+// Fields of the User.
+func (User) Fields() []ent.Field {
+    return []ent.Field{
+        field.Int("age").
+            Positive(),
+        field.String("name").
+            Default("unknown"),
+    }
+}
+
+// Edges of the User.
+func (User) Edges() []ent.Edge {
+	return nil
+}
+
+func (User) Annotations() []schema.Annotation {
+	return []schema.Annotation{
+		entgql.QueryField(),
+		entgql.Mutations(entgql.MutationCreate(), entgql.MutationUpdate()),
+	}
+}
+```
+
 5. Now that your schema is created, you want to generate your `ent.graphql`, this will contain all your graph `Input` types. The generate commands are setup in the `Makefile` to make things easier:
 ```bash
 make ent
@@ -128,32 +161,12 @@ schema
 └── organization.graphql
 └── member.graphql
 ```
-8. For a simple User, this might look something like :
-```go
-// Fields of the User.
-func (User) Fields() []ent.Field {
-    return []ent.Field{
-        field.Int("age").
-            Positive(),
-        field.String("name").
-            Default("unknown"),
-    }
-}
-
-// Edges of the User.
-func (User) Edges() []ent.Edge {
-	return nil
-}
-
-func (User) Annotations() []schema.Annotation {
-	return []schema.Annotation{
-		entgql.QueryField(),
-		entgql.Mutations(entgql.MutationCreate()),
-	}
-}
+To have the files auto generated, use:
+```bash
+make graph
 ```
 
-Now, the schema defintions should be ready to go. However, if at any point the schema needs to change, just rerun `make ent` and the ent.graphql and generated files should be updated. 
+Now, the schema definitions should be ready to go. However, if at any point the schema needs to change, just rerun `make ent` and the ent.graphql and generated files should be updated. 
 
 ### Graph API Generation with gqlgen 
 
