@@ -45,20 +45,16 @@ func main() {
 		log.Fatalf("creating entgql extension: %v", err)
 	}
 
-	opts := []entc.Option{
-		entc.Extensions(
-			gqlExt,
-			entviz.Extension{}, // graph visualization
-			oas,
-			ogent,
-		),
-	}
-
 	if err := entc.Generate("./internal/ent/schema", &gen.Config{
-		Target:   "./internal/ent/generated",
-		Features: []gen.Feature{gen.FeatureVersionedMigration},
-		Package:  "github.com/datumforge/go-template/internal/ent/generated",
-	}, opts...); err != nil {
+		Target:  "./internal/ent/generated",
+		Package: "github.com/datumforge/go-template/internal/ent/generated",
+	},
+		entc.Extensions(
+			ogent,
+			oas,
+			entviz.Extension{},
+			gqlExt,
+		)); err != nil {
 		log.Fatalf("running ent codegen: %v", err)
 	}
 }
