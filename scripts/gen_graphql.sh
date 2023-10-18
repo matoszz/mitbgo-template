@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Get all generated schema files from ent
-entSchemaDir=internal/ent/schema
+repoRoot=$(git rev-parse --show-toplevel)
+entSchemaDir=$repoRoot/internal/ent/schema
 graphSchemaDir=schema
 schemas=$(find $entSchemaDir -name '*.go')
 
