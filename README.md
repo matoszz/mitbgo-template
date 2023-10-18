@@ -20,7 +20,10 @@ brew install gomplate
 ## Usage
 
 ### Cleanup 
-1. After cloning the repo, you will need to update all occurrences of `go-template` with your repo name
+1. After cloning the repo, you will need to update all occurrences of `go-template` with your repo name. For convenience, a `make` command is included:
+```bash
+make setup-template
+```
 
 ### Schema Generation with Ent
 1. As the tooling suggests, this is schema driven api development so first up, is defining your schema
