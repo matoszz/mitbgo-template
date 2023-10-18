@@ -4,11 +4,8 @@
 appName=go-template
 appVariation=${appName/"-"/""}
 
-#What we want to update to 
+#what we want to update to 
 newAppName=${PWD##*/}  
-
-#for testing
-newAppName="blah"
 newAppVariation=${newAppName/"-"/""}
 
 echo +++ Update repo occurances with $newAppName
