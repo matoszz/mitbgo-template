@@ -15,7 +15,11 @@ This repo contains the basis for generating an opinionated Graph API using:
 1. [gotemplate cli](https://docs.gomplate.ca/installing/)
 ```
 brew install gomplate
+brew install atlas
+brew install rover
 ```
+
+1. set this environment variable `export ATLAS_DB_URI="sqlite://file?mode=memory&_fk=1"`
 
 ## Usage
 
