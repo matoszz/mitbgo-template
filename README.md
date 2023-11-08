@@ -1,35 +1,31 @@
 # go-template
+
 Template repo for golang graphql apis
 
 ## Getting Started
 
 This repo contains the basis for generating an opinionated Graph API using:
 
-1. [ent](https://entgo.io/) - ORM
+1. [ent](https://entgo.io/) - insane entity mapping tool, definitely not an ORM but kind of an ORM
 1. [atlas](https://atlasgo.io/) - Schema generation and migration
 1. [gqlgen](https://gqlgen.com/) - Code generation from schema definitions
-1. [openfga](https://openfga.dev/) - Authorization 
+1. [openfga](https://openfga.dev/) - Authorization
 
-## Prerequisites
+### Dependencies
 
-1. [gotemplate cli](https://docs.gomplate.ca/installing/)
-```
-brew install gomplate
-brew install atlas
-brew install rover
-```
-
-1. set this environment variable `export ATLAS_DB_URI="sqlite://file?mode=memory&_fk=1"`
+Setup [Taskfile](https://taskfile.dev/installation/) by following the instructions and using one of the various convenient package managers or installation scripts. You can then simply run `task install` to load the associated dependencies. Nearly everything in this repository assumes you already have a local golang environment setup so this is not included. Please see the associated documentation.
 
 ## Usage
 
 ### Cleanup 
-1. After cloning the repo, you will need to update all occurrences of `go-template` with your repo name. For convenience, a `make` command is included:
+
+1. After cloning the repo, you will need to update all occurrences of `go-template` with your repo name. For convenience, a `task` command is included:
 ```bash
-make setup-template
+task clean-template
 ```
 
 ### Schema Generation with Ent
+
 1. As the tooling suggests, this is schema driven api development so first up, is defining your schema
 2. Create a new schema by running the following command, replacing `<object>` with your object:
 ```bash
@@ -75,9 +71,9 @@ func (User) Annotations() []schema.Annotation {
 }
 ```
 
-5. Now that your schema is created, you want to generate your `ent.graphql`, this will contain all your graph `Input` types. The generate commands are setup in the `Makefile` to make things easier:
+5. Now that your schema is created, you want to generate your `ent.graphql`, this will contain all your graph `Input` types. The generate commands are setup in the `Taskfile` to make things easier:
 ```bash
-make ent
+task ent
 ```
 6. This will create a `schema/ent.graphql` file
 ```
@@ -170,7 +166,7 @@ schema
 ```
 To have the files auto generated, use:
 ```bash
-make graph
+task graph
 ```
 
 Now, the schema definitions should be ready to go. However, if at any point the schema needs to change, just rerun `make ent` and the ent.graphql and generated files should be updated. 
@@ -179,7 +175,7 @@ Now, the schema definitions should be ready to go. However, if at any point the 
 
 1. With the schemas ready, we can now generate the api code: 
 ```bash
-make gqlgen
+task gqlgen
 ```
 2. This will have created a new `internal/api` directory with a resolver per schema object
 ```
@@ -218,5 +214,5 @@ make run-dev
 
 1. Create DB Migrations with `atlas`:
 ```bash
-go run db/create_migrations.go <name>
+task atlas:create
 ```

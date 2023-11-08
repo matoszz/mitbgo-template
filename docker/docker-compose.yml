@@ -1,5 +1,4 @@
 version: "3.9"
-
 services:
   api:
     build:
@@ -7,9 +6,13 @@ services:
       dockerfile: Dockerfile
     command:
       - serve
-      - --development
+      - --debug
+      - --pretty
+      - --dev
+      - --jwt-secretkey=mysupersecretkey
+      # - --oidc=false # uncomment to bypass auth checks
     ports:
       - "17608:17608"
     restart: unless-stopped
     networks:
-      - go-service
+      - default

@@ -16,3 +16,21 @@
 
 # Go workspace file
 go.work
+
+*.db
+*.crt
+*key
+
+# Logs 
+*.log
+
+# Editor files
+.vscode
+
+# OS Generated Files
+.DS_Store*
+.AppleDouble
+.LSOverride
+ehthumbs.db
+Icon?
+Thumbs.db
