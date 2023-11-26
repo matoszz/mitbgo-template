@@ -7,6 +7,7 @@ tasks:
   clean-template:
     cmds:
       - bash scripts/clean.sh
+      
   clean:
     cmds:
       - |
