@@ -1,6 +1,6 @@
 # go-template
 
-Template repo for golang graphql apis
+Template repo for golang graphql apis.
 
 ## Getting Started
 
