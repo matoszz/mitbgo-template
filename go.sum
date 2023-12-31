@@ -52,6 +52,8 @@ github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5 h1:TngWCqHvy9oXAN6lEV
 github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5/go.mod h1:lmUJ/7eu/Q8D7ML55dXQrVaamCz2vxCfdQBasLZfHKk=
 github.com/Yamashou/gqlgenc v0.16.0 h1:k1X/dvwnkiDImaeYw+C1j+GDX3MnzB4aONOTE6Mrku4=
 github.com/Yamashou/gqlgenc v0.16.0/go.mod h1:yKaNzczoGrIElG3mG8j2Bg3imv4WyIjLSTRBtvhfMtU=
+github.com/Yamashou/gqlgenc v0.16.1 h1:oqBYrrb2Qm8Y80Z977zgjMbl2TxmERpAuv8wjZY2Jyk=
+github.com/Yamashou/gqlgenc v0.16.1/go.mod h1:yKaNzczoGrIElG3mG8j2Bg3imv4WyIjLSTRBtvhfMtU=
 github.com/agnivade/levenshtein v1.1.1 h1:QY8M92nrzkmr798gCo3kmMyqXFzdQVpxLlGPRBij0P8=
 github.com/agnivade/levenshtein v1.1.1/go.mod h1:veldBMzWxcCG2ZvUTKD2kJNRdCk5hVbJomOvKkmgYbo=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883 h1:bvNMNQO63//z+xNgfBlViaCIJKLlCJ6/fmUseuG0wVQ=
