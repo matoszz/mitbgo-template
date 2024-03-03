@@ -1,0 +1,59 @@
+db:
+    catch_ttl: 0
+    database_name: ""
+    debug: false
+    driver_name: ""
+    multi_write: false
+    primary_db_source: ""
+    run_migrations: false
+    secondary_db_source: ""
+redis:
+    address: ""
+    db: 0
+    dial_timeout: 0
+    enabled: false
+    max_active_conns: 0
+    max_idle_conns: 0
+    max_retries: 0
+    min_idle_conns: 0
+    name: ""
+    password: ""
+    read_timeout: 0
+    username: ""
+    write_timeout: 0
+refresh_interval: 0
+server:
+    cors:
+        allow_origins: null
+        cookie_insecure: false
+    debug: false
+    dev: false
+    idle_timeout: 0
+    listen: ""
+    read_header_timeout: 0
+    read_timeout: 0
+    shutdown_grace_period: 0
+    tls:
+        auto_cert: false
+        cert_file: ""
+        cert_key: ""
+        config: null
+        enabled: false
+    write_timeout: 0
+sessions:
+    encryption_key: ""
+    signing_key: ""
+tracer:
+    enabled: false
+    environment: ""
+    otlp:
+        certificate: ""
+        compression: ""
+        endpoint: ""
+        headers: null
+        insecure: false
+        timeout: 0
+    provider: ""
+    stdout:
+        disable_timestamp: false
+        pretty: false

@@ -1,16 +1,22 @@
 model:
-  package: testclient
-  filename: ./internal/testclient/gen_models.go
+  package: templateclient
+  filename: ./internal/templateclient/models.go
 client:
-  package: testclient
-  filename: ./internal/testclient/gen_client.go # Where should any generated client go?
+  package: templateclient
+  filename: ./internal/templateclient/graphclient.go
 models:
   Int:
     model: github.com/99designs/gqlgen/graphql.Int64
-  Date:
-    model: github.com/99designs/gqlgen/graphql.Time
+  ID:
+    model:
+      -  github.com/99designs/gqlgen/graphql.String
+  JSON:
+    model:
+      -  github.com/datumforge/entx.json.RawMessage
 schema: ["schema.graphql" ]
-query: ["internal/testclient/*.gql"]
+query: ["query/*.graphql"]
 generate:
   clientV2: true
-  clientInterfaceName: "TestClient"
+  clientInterfaceName: "TemplateClient"
+  query: false
+  mutation: false

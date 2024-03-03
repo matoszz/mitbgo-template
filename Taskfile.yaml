@@ -1,101 +1,131 @@
-version: "3"
+version: '3'
+
+includes:
+  cli: 
+    taskfile: ./cmd/cli
+    dir: ./cmd/cli
+  docker: 
+    taskfile: ./docker
+    dir: ./docker
+    aliases: [compose]
+  db: 
+    taskfile: ./db
+    dir: ./db
+    aliases: [atlas]
+  config: 
+    taskfile: ./jsonschema
 
 env:
   ATLAS_DB_URI: "sqlite://file?mode=memory&_fk=1"
+  TEST_DB_URL: "libsql://file::memory:?cache=shared"
+  TEST_FGA_URL: "localhost:8080"
+  ENV: config
 
 tasks:
-  clean-template:
-    cmds:
-      - bash scripts/clean.sh
-  clean:
-    cmds:
-      - |
-        echo "Enter the name of the ent schema object name to clean:"
-        read clean;
-        go run ./internal/entclean/main.go --path=internal/ent ${clean};
-      - "rm -rf internal/ent/generated/^doc.go"
-      - "rm -rf internal/api/^resolver.go"
-      - "rm -f schema/ent.graphql"
-      - "rm -f schema.graphql"
-      - "rm -rf internal/datumclient/"
-  ent:
-    - go generate ./...
   install:
+    desc: installs tools and packages needed to develop against the template repo
     cmds:
-      - "go install github.com/go-task/task/v3/cmd/task@latest"
-      - "go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest"
+      - "brew install gomplate"
       - "go install entgo.io/ent/cmd/ent@latest"
       - "go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
       - "curl -sSf https://atlasgo.sh | sh"
       - "curl -sSL https://rover.apollo.dev/nix/latest | sh"
       - "go get -u github.com/openfga/go-sdk"
+      - "brew install openfga/tap/fga"
+      - go install github.com/vektra/mockery/v2@v2.40.1
+      - task: config:install
       - defer: { task: go:tidy }
-  graph:
-    cmds:
-        - bash scripts/gen_graphql.sh
-  gqlgen:
-    cmds:
-      - go run github.com/99designs/gqlgen generate --verbose
-      - task: tidy
-      - go run ./gen_schema.go
-      - go run github.com/Yamashou/gqlgenc generate --configdir schema
+  
   generate:
+    desc: a combination of the ent, graph, and gqlgen tasks which are required to fully generate the necessary graph, server, resolvers, client, etc. 
     cmds:
-      - task: ent
-      - task: graph
-      - task: gqlgen
-  atlas:
-    aliases: [atlas]
-    cmds:
-      - task: atlas:create
-      - task: atlas:migrate
-      - task: atlas:lint
-  atlas:create:
-    cmds:
-      - |
-        echo "If there is no schema to generate, this will not create a file (hint: name it your branch name if you're not sure) - enter the name of the migration:"
-        read migration;
-        go run db/create_migrations.go ${migration};
-#  atlas:lint:
-#    - atlas migrate lint --dev-url "sqlite://file?mode=memory&_fk=1" --dir "file://db/migrations" -w   
-#  atlas:migrate:
-#    - atlas migrate push [youratlasorg] --dev-url "sqlite://dev?mode=memory&_fk=1" --dir "file://db/migrations"
-  atlas:resethash:
-    - atlas migrate hash --dir="file://db/migrations"
-  rover:
-    - rover dev -u http://localhost:17608/query -s schema.graphql -n datum --elv2-license=accept
-    - 'open "http://localhost:4000"'
-  run-dev:
-    - go run main.go serve  --debug --pretty --dev
-  run-dev-jwt:
-    - go run main.go serve  --debug --pretty --dev --jwt-secretkey=mysupersecretkey
+      - go generate ./...
+      - cp ./internal/ent/generated/openapi.json ./internal/httpserve/route
+
+  ## Go tasks
   go:lint:
+    desc: runs golangci-lint, the most annoying opinionated linter ever
     cmds:
       - golangci-lint run -v
+
   go:test:
+    desc: runs and outputs results of created go tests
     cmds:
-      - go test -v ./...
+      - go test -v ./... 
+
+  go:test:cover:
+    desc: runs and outputs results of created go tests with coverage
+    aliases: [cover]
+    cmds:
+      - go test -v ./... -coverprofile=coverage.out
+      - go tool cover -html=coverage.out
+
+  go:fmt:
+    desc: format all go code
+    cmds:
+      - go fmt ./...
+
   go:tidy:
     desc: Runs go mod tidy on the backend
     aliases: [tidy]
     cmds:
       - go mod tidy
+
+  go:build:
+    desc: Runs go build for the template server
+    cmds:
+      - go build -mod=mod -o template
+
+  go:build-cli:
+    aliases: [buildcli]
+    desc: Runs go build for the template cli
+    cmds:
+      - go build -mod=mod -o template-cli ./cmd/cli 
+
   go:all:
     aliases: [go]
     desc: Runs all go test and lint related tasks
     cmds:
       - task: go:tidy
+      - task: go:fmt
       - task: go:lint
       - task: go:test
-  compose:fga:
+ 
+  # dev tasks
+  run-dev:
+    dotenv: ['{{.ENV}}/.env-dev']
+    desc: runs the template server in dev mode
     cmds:
-      - "docker compose -f ./docker/docker-compose-fga.yml -p fga up -d"
-      - 'open "http://localhost:3000/playground"'
-  compose:datum:
-    cmds:
-      - "docker compose -f ./docker/docker-compose.yml -p datum up -d"
+    - task: compose:redis
+    - task: compose:fga
+    - go run main.go serve --debug --pretty
+
   pr:
+    desc: runs the comprehensive roll-up tasks required to ensure all files are being committed / pushed as a part of opening a PR 
     cmds:
       - task: generate
-      - task: atlas
+      - task: config:generate
+      - task: config:docs
+      - task: atlas:all
       - task: go
+      - task: fga:test
+
+  ci:
+    desc: a task that runs during CI
+    cmds:
+      - task: generate
+      - task: tidy
+      - "git config --global --add safe.directory /workdir"
+      - |
+        status=$(git status --porcelain)
+        if [ -n "$status" ]; then
+        echo "detected git diff after running generate; please re-run tasks"
+        echo "$status"
+        exit 1
+        fi
+
+  clean:local:
+    desc: cleans up template.db and template-cli local
+    cmds:
+      - "rm -f template.db"
+      - "rm -f template-cli"
