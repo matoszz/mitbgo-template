@@ -13,6 +13,7 @@ Config contains the configuration for the datum server
 |[**redis**](#redis)|`object`|||
 |[**tracer**](#tracer)|`object`|||
 |[**sessions**](#sessions)|`object`|||
+|[**sentry**](#sentry)|`object`|||
 
 **Additional Properties:** not allowed  
 <a name="server"></a>
@@ -167,6 +168,27 @@ CORS settings for the server to allow cross origin requests
 |----|----|-----------|--------|
 |**signing\_key**|`string`|||
 |**encryption\_key**|`string`|||
+
+**Additional Properties:** not allowed  
+<a name="sentry"></a>
+## sentry: object
+
+**Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**enabled**|`boolean`|||
+|**dsn**|`string`|||
+|**environment**|`string`|||
+|**enable\_tracing**|`boolean`|||
+|**trace\_sampler**|`number`|||
+|**attach\_stacktrace**|`boolean`|||
+|**sample\_rate**|`number`|||
+|**trace\_sample\_rate**|`number`|||
+|**profile\_sample\_rate**|`number`|||
+|**repanic**|`boolean`|||
+|**debug**|`boolean`|||
+|**server\_name**|`string`|||
 
 **Additional Properties:** not allowed  
 

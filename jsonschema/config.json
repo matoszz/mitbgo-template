@@ -239,6 +239,48 @@
       "additionalProperties": false,
       "type": "object"
     },
+    "sentry.Config": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "dsn": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "enable_tracing": {
+          "type": "boolean"
+        },
+        "trace_sampler": {
+          "type": "number"
+        },
+        "attach_stacktrace": {
+          "type": "boolean"
+        },
+        "sample_rate": {
+          "type": "number"
+        },
+        "trace_sample_rate": {
+          "type": "number"
+        },
+        "profile_sample_rate": {
+          "type": "number"
+        },
+        "repanic": {
+          "type": "boolean"
+        },
+        "debug": {
+          "type": "boolean"
+        },
+        "server_name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "sessions.Config": {
       "properties": {
         "signing_key": {
@@ -276,6 +318,10 @@
     "sessions": {
       "$ref": "#/$defs/sessions.Config",
       "description": "Sessions config for user sessions and cookies"
+    },
+    "sentry": {
+      "$ref": "#/$defs/sentry.Config",
+      "description": "Sentry contains the sentry configuration for error tracking"
     }
   },
   "additionalProperties": false,
