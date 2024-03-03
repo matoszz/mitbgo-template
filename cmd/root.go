@@ -5,8 +5,6 @@ import (
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
-
-	"github.com/datumforge/datum/pkg/utils/sentry"
 )
 
 const appName = "template"
@@ -43,7 +41,7 @@ func init() {
 func initConfig() {
 	err := viper.ReadInConfig()
 
-	logger = sentry.NewLogger()
+	logger = newLogger()
 
 	if err == nil {
 		logger.Infow("using config file", "file", viper.ConfigFileUsed())
@@ -56,4 +54,25 @@ func viperBindFlag(name string, flag *pflag.Flag) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+// newLogger creates a new zap logger with the appropriate configuration based on the viper settings for pretty and debug
+func newLogger() *zap.SugaredLogger {
+	cfg := zap.NewProductionConfig()
+	if viper.GetBool("pretty") {
+		cfg = zap.NewDevelopmentConfig()
+	}
+
+	if viper.GetBool("debug") {
+		cfg.Level = zap.NewAtomicLevelAt(zap.DebugLevel)
+	} else {
+		cfg.Level = zap.NewAtomicLevelAt(zap.InfoLevel)
+	}
+
+	logger, err := cfg.Build()
+	if err != nil {
+		panic(err)
+	}
+
+	return logger.Sugar()
 }

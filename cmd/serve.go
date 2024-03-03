@@ -46,7 +46,6 @@ func serve(ctx context.Context) error {
 		serveropts.WithConfigProvider(&config.ConfigProviderWithRefresh{}),
 		serveropts.WithLogger(logger),
 		serveropts.WithHTTPS(),
-		serveropts.WithSentry(),
 		serveropts.WithMiddleware(),
 	)
 

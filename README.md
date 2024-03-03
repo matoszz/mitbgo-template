@@ -85,105 +85,32 @@ task clean-template
 
     schema
     ├── ent.graphql
+    └── todo.graphql
     ```
     As well as generated ent files, including the `openapi.json`: 
-    ```
-    internal/ent/generated
-    ├── client.go
-    ├── doc.go
-    ├── ent.go
-    ├── enttest
-    │   └── enttest.go
-    ├── entviz.go
-    ├── gql_collection.go
-    ├── gql_edge.go
-    ├── gql_node.go
-    ├── gql_pagination.go
-    ├── gql_transaction.go
-    ├── gql_where_input.go
-    ├── hook
-    │   └── hook.go
-    ├── member
-    │   ├── member.go
-    │   └── where.go
-    ├── member.go
-    ├── member_create.go
-    ├── member_delete.go
-    ├── member_query.go
-    ├── member_update.go
-    ├── migrate
-    │   ├── migrate.go
-    │   └── schema.go
-    ├── mutation.go
-    ├── ogent
-    │   ├── oas_cfg_gen.go
-    │   ├── oas_client_gen.go
-    │   ├── oas_handlers_gen.go
-    │   ├── oas_interfaces_gen.go
-    │   ├── oas_json_gen.go
-    │   ├── oas_middleware_gen.go
-    │   ├── oas_parameters_gen.go
-    │   ├── oas_request_decoders_gen.go
-    │   ├── oas_request_encoders_gen.go
-    │   ├── oas_response_decoders_gen.go
-    │   ├── oas_response_encoders_gen.go
-    │   ├── oas_router_gen.go
-    │   ├── oas_schemas_gen.go
-    │   ├── oas_server_gen.go
-    │   ├── oas_unimplemented_gen.go
-    │   ├── oas_validators_gen.go
-    │   ├── ogent.go
-    │   └── responses.go
-    ├── openapi.json
-    ├── organization
-    │   ├── organization.go
-    │   └── where.go
-    ├── organization.go
-    ├── organization_create.go
-    ├── organization_delete.go
-    ├── organization_query.go
-    ├── organization_update.go
-    ├── predicate
-    │   └── predicate.go
-    ├── runtime
-    │   └── runtime.go
-    ├── runtime.go
-    ├── schema-viz.html
-    ├── tx.go
-    ├── user
-    │   ├── user.go
-    │   └── where.go
-    ├── user.go
-    ├── user_create.go
-    ├── user_delete.go
-    ├── user_query.go
-    └── user_update.go
-    ```
-
+   
 1. This will have created a new `internal/graphapi` directory with a resolver per schema object
     ```
-    tree internal/api
-    internal/api
+    internal/graphapi
+    ├── doc.go
     ├── ent.resolvers.go
-    ├── federation.go
     ├── gen_models.go
     ├── gen_server.go
+    ├── helpers.go
     ├── resolver.go
-    └── user.resolvers.go
-    └── organization.resolvers.go
-    └── member.resolvers.go
+    └── todo.resolvers.go
     ```
 1. In the resolvers, there will be stubbed out CRUD operations based on the grapqhl schemas. The business logic and permissions checks should go in here:
     ```go
-    // CreateUser is the resolver for the createUser field.
-    func (r *mutationResolver) CreateUser(ctx context.Context, input CreateUserInput) (*User, error) {
-        panic(fmt.Errorf("not implemented: CreateUser - createUser"))
+    // CreateTodo is the resolver for the createTodo field.
+    func (r *mutationResolver) CreateTodo(ctx context.Context, input CreateUserInput) (*User, error) {
+        panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
     }
     ```
 
 ### Dependencies
 
-The Datum ecosystem has additional depedencies that were not included in the vanilla template because they will not be required for all services. These include things such as:
+The Datum ecosystem has additional dependencies that were not included in the vanilla template because they will not be required for all services. These include things such as:
 
 1. [Email Manager](https://github.com/datumforge/datum/tree/main/pkg/utils/emails)
 1. [Task Manager](https://github.com/datumforge/datum/tree/main/pkg/utils/marionette)
@@ -200,7 +127,7 @@ To add these to your project, refer to the implementation in [Datum](https://git
 
 1. Now that all the code is there, test it using the playground:
     ```
-    make run-dev
+    task run-dev
     ```
 1. Using the default config, you should be able to go to your browser of choice and see the playground: http://localhost:1337/playground
 1. Via curl, `http://localhost:1337/query`

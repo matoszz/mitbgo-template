@@ -15,7 +15,6 @@ import (
 	"github.com/datumforge/datum/pkg/cache"
 	"github.com/datumforge/datum/pkg/otelx"
 	"github.com/datumforge/datum/pkg/sessions"
-	"github.com/datumforge/datum/pkg/utils/sentry"
 )
 
 var (
@@ -41,9 +40,6 @@ type Config struct {
 
 	// Sessions config for user sessions and cookies
 	Sessions sessions.Config `json:"sessions" koanf:"sessions"`
-
-	// Sentry contains the sentry configuration for error tracking
-	Sentry sentry.Config `json:"sentry" koanf:"sentry"`
 }
 
 // Server settings for the echo server
