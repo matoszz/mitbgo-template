@@ -1,6 +1,6 @@
 linters-settings:
   goimports:
-    local-prefixes: github.com/datumforge/datum
+    local-prefixes: github.com/datumforge/go-template
   gofumpt:
     extra-rules: true
   gosec:
@@ -10,7 +10,10 @@ linters-settings:
 
 run:
   skip-files:
-    - internal/entclean/main.go
+    - .buildkite/*
+    - .github/*
+    - docker/*
+    - schema/*
 
 linters:
   enable:
@@ -25,8 +28,6 @@ linters:
     - gosec
     - bodyclose
     - noctx
-
-    # additional linters
     - gocritic
     - gocyclo
     - goerr113

@@ -1,0 +1,79 @@
+version: "3"
+
+tasks:
+  build:
+    dir: ..
+    desc: builds the template docker image
+    cmds:
+      - "docker build -f docker/Dockerfile . -t template:dev"
+
+  template:
+    dir: ..
+    desc: brings up the compose environment for the template server configured with auth
+    deps: [build]
+    cmds:
+      - "docker compose -f ./docker/docker-compose-redis.yml  -f ./docker/docker-compose.yml -f ./docker/docker-compose-fga.yml -p template up -d"
+
+  datum:down:
+    dir: ..
+    desc: brings the template compose environment down
+    cmds:
+      - "docker compose -p template down"
+
+  all:up:
+    dir: ..
+    desc: brings up the full docker compose development environment including template server, fga, and rover
+    cmds:
+      - task: template
+      - task: rover
+
+  all:down: 
+    dir: ..
+    desc: brings down both fga and template server compose environments 
+    cmds:
+      - task: template:down
+      
+  redis:
+    dir: ..
+    desc: brings up the compose environment for redis
+    cmds:
+      - "docker compose -f ./docker/docker-compose-redis.yml -p redis up -d"
+
+  redis:down:
+    dir: ..
+    desc: brings up the compose environment for redis
+    cmds:
+      - "docker compose -p redis down"
+
+  fga:
+    dir: ..
+    desc: brings up the compose environment for openfga development
+    cmds:
+      - "docker compose -f ./docker/docker-compose-fga.yml -p fga up -d"
+
+  fga:down:
+    dir: ..
+    desc: brings the fga compose environment down
+    cmds: 
+      - docker compose -p fga down
+
+  fga:open:
+    dir: ..
+    desc: opens the fga playground in a browser
+    cmds: 
+      - 'open "http://localhost:3000/playground"'
+
+  fga:up:
+    dir: ..
+    desc: brings the fga compose environment up and opens the fga playground
+    aliases: [fgaup]
+    cmds:
+      - task: fga
+      - task: fga:open
+
+  rover:
+    dir: ..
+    desc: launches an interactive browser to navigate the configured graph schema
+    cmds:
+      - 'open "http://localhost:4000"'
+      - rover dev --skip-update-check --skip-update -u http://localhost:1337/query -s schema.graphql -n template --elv2-license=accept

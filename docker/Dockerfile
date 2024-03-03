@@ -1,10 +1,10 @@
-FROM golang:1.22 as builder
+FROM golang:1.22 AS builder
 
 WORKDIR /go/src/app
 COPY . .
 
 RUN go mod download
-RUN CGO_ENABLED=1 GOOS=linux go build -o /go/bin/datum -a -ldflags '-linkmode external -extldflags "-static"' .
+RUN CGO_ENABLED=1 GOOS=linux go build -o /go/bin/template -a -ldflags '-linkmode external -extldflags "-static"' .
 
 FROM gcr.io/distroless/static:nonroot
 
@@ -12,8 +12,8 @@ FROM gcr.io/distroless/static:nonroot
 USER 65532:65532
 
 # Copy the binary that goreleaser built
-COPY --from=builder /go/bin/datum /bin/datum
+COPY --from=builder /go/bin/template /bin/template
 
 # Run the web service on container startup.
-ENTRYPOINT [ "/bin/datum" ]
-CMD ["serve","--debug","--pretty","--dev"]
+ENTRYPOINT [ "/bin/template" ]
+CMD ["serve"]

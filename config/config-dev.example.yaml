@@ -1,0 +1,15 @@
+# server settings
+server: 
+  debug: true
+  dev: true
+
+  # tls settings
+  tls:
+    enabled: false
+  
+# db settings
+db: 
+  debug: true
+  driver_name: libsql
+  primary_db_source: "file:template.db"
+  multi_write: false

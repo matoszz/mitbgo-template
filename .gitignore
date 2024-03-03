@@ -17,9 +17,24 @@
 # Go workspace file
 go.work
 
+# local dev created files
 *.db
-*.crt
-*key
+server.crt 
+server.key 
+private_key.pem
+public_key.pem
+# Sendgrid test email folders
+internal/httpserve/handlers/fixtures/emails/*
+fixtures/emails/*
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
 
 # Logs 
 *.log
@@ -34,3 +49,14 @@ go.work
 ehthumbs.db
 Icon?
 Thumbs.db
+
+.scannerwork/**
+results.txt
+
+*.mime
+*.mim
+
+# Configs
+*.env
+*.env-dev
+*.config.yaml

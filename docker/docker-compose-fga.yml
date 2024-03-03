@@ -1,3 +1,4 @@
+version: "3.9"
 services:
   postgres:
     image: postgres:16
@@ -54,7 +55,7 @@ services:
           "-addr=openfga:8081"
         ]
       interval: 5s
-      imeout: 30s
+      timeout: 30s
       retries: 3
     networks:
       - default

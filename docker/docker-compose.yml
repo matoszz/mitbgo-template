@@ -1,18 +1,24 @@
 version: "3.9"
+
 services:
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: template:dev
+    depends_on:
+      - openfga
     command:
       - serve
       - --debug
       - --pretty
-      - --dev
-      - --jwt-secretkey=mysupersecretkey
-      # - --oidc=false # uncomment to bypass auth checks
+      - --config=/config/.config.yaml
+    volumes:
+      - type: bind
+        source: ../config/.config.yaml
+        target: /config/.config.yaml
     ports:
-      - "17608:17608"
+      - "1337:1337"
     restart: unless-stopped
+    environment:
+      - DATUM_REDIS_ADDRESS=redis:6379
+      - DATUM_AUTHZ_HOST_URL=openfga:8080
     networks:
       - default
