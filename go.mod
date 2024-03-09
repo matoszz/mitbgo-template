@@ -13,7 +13,7 @@ require (
 	github.com/datumforge/echo-prometheus/v5 v5.0.0-20231205192725-e697eaa86d58
 	github.com/datumforge/echox v0.0.0-20240204015542-90bd5e1f295d
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
-	github.com/datumforge/entx v0.0.7-0.20240308153242-bc60b1785150
+	github.com/datumforge/entx v0.0.7
 	github.com/datumforge/fgax v0.1.3-0.20240308153825-05b2f127ef34
 	github.com/gorilla/websocket v1.5.1
 	github.com/hashicorp/go-multierror v1.1.1
