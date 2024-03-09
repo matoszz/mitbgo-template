@@ -81,13 +81,13 @@ CORS settings for the server to allow cross origin requests
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
 |**debug**|`boolean`|debug enables printing the debug database logs<br/>|no|
-|**database\_name**|`string`|the name of the database to use with otel tracing<br/>|no|
-|**driver\_name**|`string`|sql driver name<br/>|no|
-|**multi\_write**|`boolean`|enables writing to two databases simultaneously<br/>|no|
-|**primary\_db\_source**|`string`|dsn of the primary database<br/>|yes|
-|**secondary\_db\_source**|`string`|dsn of the secondary database if multi-write is enabled<br/>|no|
-|**cache\_ttl**|`integer`|cache results for subsequent requests<br/>|no|
-|**run\_migrations**|`boolean`|run migrations on startup<br/>|no|
+|**databaseName**|`string`|the name of the database to use with otel tracing<br/>|no|
+|**driverName**|`string`|sql driver name<br/>|no|
+|**multiWrite**|`boolean`|enables writing to two databases simultaneously<br/>|no|
+|**primaryDbSource**|`string`|dsn of the primary database<br/>|yes|
+|**secondaryDbSource**|`string`|dsn of the secondary database if multi-write is enabled<br/>|no|
+|**cacheTTL**|`integer`|cache results for subsequent requests<br/>|no|
+|**runMigrations**|`boolean`|run migrations on startup<br/>|no|
 
 **Additional Properties:** not allowed  
 <a name="redis"></a>
@@ -103,13 +103,13 @@ CORS settings for the server to allow cross origin requests
 |**username**|`string`|||
 |**password**|`string`|||
 |**db**|`integer`|||
-|**dial\_timeout**|`integer`|||
-|**read\_timeout**|`integer`|||
-|**write\_timeout**|`integer`|||
-|**max\_retries**|`integer`|||
-|**min\_idle\_conns**|`integer`|||
-|**max\_idle\_conns**|`integer`|||
-|**max\_active\_conns**|`integer`|||
+|**dialTimeout**|`integer`|||
+|**readTimeout**|`integer`|||
+|**writeTimeout**|`integer`|||
+|**maxRetries**|`integer`|||
+|**minIdleConns**|`integer`|||
+|**maxIdleConns**|`integer`|||
+|**maxActiveConns**|`integer`|||
 
 **Additional Properties:** not allowed  
 <a name="tracer"></a>
@@ -134,7 +134,7 @@ CORS settings for the server to allow cross origin requests
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
 |**pretty**|`boolean`|||
-|**disable\_timestamp**|`boolean`|||
+|**disableTimestamp**|`boolean`|||
 
 **Additional Properties:** not allowed  
 <a name="tracerotlp"></a>
@@ -165,8 +165,8 @@ CORS settings for the server to allow cross origin requests
 
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
-|**signing\_key**|`string`|||
-|**encryption\_key**|`string`|||
+|**signingKey**|`string`|||
+|**encryptionKey**|`string`|||
 
 **Additional Properties:** not allowed  
 

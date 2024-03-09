@@ -28,25 +28,25 @@
         "db": {
           "type": "integer"
         },
-        "dial_timeout": {
+        "dialTimeout": {
           "type": "integer"
         },
-        "read_timeout": {
+        "readTimeout": {
           "type": "integer"
         },
-        "write_timeout": {
+        "writeTimeout": {
           "type": "integer"
         },
-        "max_retries": {
+        "maxRetries": {
           "type": "integer"
         },
-        "min_idle_conns": {
+        "minIdleConns": {
           "type": "integer"
         },
-        "max_idle_conns": {
+        "maxIdleConns": {
           "type": "integer"
         },
-        "max_active_conns": {
+        "maxActiveConns": {
           "type": "integer"
         }
       },
@@ -147,31 +147,31 @@
           "type": "boolean",
           "description": "debug enables printing the debug database logs"
         },
-        "database_name": {
+        "databaseName": {
           "type": "string",
           "description": "the name of the database to use with otel tracing"
         },
-        "driver_name": {
+        "driverName": {
           "type": "string",
           "description": "sql driver name"
         },
-        "multi_write": {
+        "multiWrite": {
           "type": "boolean",
           "description": "enables writing to two databases simultaneously"
         },
-        "primary_db_source": {
+        "primaryDbSource": {
           "type": "string",
           "description": "dsn of the primary database"
         },
-        "secondary_db_source": {
+        "secondaryDbSource": {
           "type": "string",
           "description": "dsn of the secondary database if multi-write is enabled"
         },
-        "cache_ttl": {
+        "cacheTTL": {
           "type": "integer",
           "description": "cache results for subsequent requests"
         },
-        "run_migrations": {
+        "runMigrations": {
           "type": "boolean",
           "description": "run migrations on startup"
         }
@@ -179,7 +179,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "primary_db_source"
+        "primaryDbSource"
       ]
     },
     "otelx.Config": {
@@ -232,7 +232,7 @@
         "pretty": {
           "type": "boolean"
         },
-        "disable_timestamp": {
+        "disableTimestamp": {
           "type": "boolean"
         }
       },
@@ -241,10 +241,10 @@
     },
     "sessions.Config": {
       "properties": {
-        "signing_key": {
+        "signingKey": {
           "type": "string"
         },
-        "encryption_key": {
+        "encryptionKey": {
           "type": "string"
         }
       },

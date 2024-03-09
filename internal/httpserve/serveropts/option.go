@@ -133,10 +133,10 @@ func WithMiddleware() ServerOption {
 				Format: "remote_ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}, session=${header:Set-Cookie}, host=${host}, referer=${referer}, user_agent=${user_agent}, route=${route}, path=${path}, auth=${header:Authorization}\n",
 			}),
 			sentry.New(),
-			echoprometheus.MetricsMiddleware(),           // add prometheus metrics
-			echozap.ZapLogger(s.Config.Logger.Desugar()), // add zap logger, middleware requires the "regular" zap logger
-			echocontext.EchoContextToContextMiddleware(), // adds echo context to parent
-			cors.New(), // add cors middleware
+			echoprometheus.MetricsMiddleware(),                   // add prometheus metrics
+			echozap.ZapLogger(s.Config.Logger.Desugar()),         // add zap logger, middleware requires the "regular" zap logger
+			echocontext.EchoContextToContextMiddleware(),         // adds echo context to parent
+			cors.New(s.Config.Settings.Server.CORS.AllowOrigins), // add cors middleware
 			mime.NewWithConfig(mime.Config{DefaultContentType: echo.MIMEApplicationJSONCharsetUTF8}), // add mime middleware
 			cachecontrol.New(),                 // add cache control middleware
 			ratelimit.DefaultRateLimiter(),     // add ratelimit middleware
@@ -160,7 +160,7 @@ func WithSessionManager(rc *redis.Client) ServerOption {
 			cc.Name = sessions.DefaultCookieName
 		}
 
-		sm := sessions.NewCookieStore[map[string]string](cc,
+		sm := sessions.NewCookieStore[map[string]any](cc,
 			[]byte(s.Config.Settings.Sessions.SigningKey),
 			[]byte(s.Config.Settings.Sessions.EncryptionKey),
 		)
