@@ -13,6 +13,12 @@ import (
 	"github.com/mcuadros/go-defaults"
 
 	"github.com/datumforge/datum/pkg/cache"
+	"github.com/datumforge/datum/pkg/middleware/cachecontrol"
+	"github.com/datumforge/datum/pkg/middleware/cors"
+	"github.com/datumforge/datum/pkg/middleware/mime"
+	"github.com/datumforge/datum/pkg/middleware/ratelimit"
+	"github.com/datumforge/datum/pkg/middleware/redirect"
+	"github.com/datumforge/datum/pkg/middleware/secure"
 	"github.com/datumforge/datum/pkg/otelx"
 	"github.com/datumforge/datum/pkg/sessions"
 )
@@ -40,6 +46,9 @@ type Config struct {
 
 	// Sessions config for user sessions and cookies
 	Sessions sessions.Config `json:"sessions" koanf:"sessions"`
+
+	// Ratelimit contains the configuration for the rate limiter
+	Ratelimit ratelimit.Config `json:"ratelimit" koanf:"ratelimit"`
 }
 
 // Server settings for the echo server
@@ -63,7 +72,15 @@ type Server struct {
 	// TLS contains the tls configuration settings
 	TLS TLS `json:"tls" koanf:"tls"`
 	// CORS contains settings to allow cross origin settings and insecure cookies
-	CORS CORS `json:"cors" koanf:"cors"`
+	CORS cors.Config `json:"cors" koanf:"cors"`
+	// Secure contains settings for the secure middleware
+	Secure secure.Config `json:"secure" koanf:"secure"`
+	// Redirect contains settings for the redirect middleware
+	Redirects redirect.Config `json:"redirect" koanf:"redirects"`
+	// CacheControl contains settings for the cache control middleware
+	CacheControl cachecontrol.Config `json:"cacheControl" koanf:"cacheControl"`
+	// Mime contains settings for the mime middleware
+	Mime mime.Config `json:"mime" koanf:"mime"`
 }
 
 // CORS settings for the server to allow cross origin requests
