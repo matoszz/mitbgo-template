@@ -14,7 +14,7 @@ require (
 	github.com/datumforge/echox v0.0.0-20240204015542-90bd5e1f295d
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
 	github.com/datumforge/entx v0.0.7
-	github.com/datumforge/fgax v0.1.3
+	github.com/datumforge/fgax v0.1.4
 	github.com/gorilla/websocket v1.5.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/invopop/jsonschema v0.12.0
@@ -125,7 +125,7 @@ require (
 	github.com/opencontainers/image-spec v1.1.0 // indirect
 	github.com/openfga/api/proto v0.0.0-20240201160513-05de9d8be3ee // indirect
 	github.com/openfga/go-sdk v0.3.5 // indirect
-	github.com/openfga/language/pkg/go v0.0.0-20240307152633-772cdd8b6a9c // indirect
+	github.com/openfga/language/pkg/go v0.0.0-20240317082346-05173c4e8833 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
