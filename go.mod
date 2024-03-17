@@ -9,12 +9,12 @@ require (
 	github.com/99designs/gqlgen v0.17.45
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2
 	github.com/Yamashou/gqlgenc v0.19.3
-	github.com/datumforge/datum v0.3.5
+	github.com/datumforge/datum v0.3.6
 	github.com/datumforge/echo-prometheus/v5 v5.0.0-20231205192725-e697eaa86d58
-	github.com/datumforge/echox v0.0.0-20240204015542-90bd5e1f295d
+	github.com/datumforge/echox v0.0.0-20240312185605-fdb5a150410e
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
 	github.com/datumforge/entx v0.0.7
-	github.com/datumforge/fgax v0.1.3
+	github.com/datumforge/fgax v0.1.4
 	github.com/gorilla/websocket v1.5.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/invopop/jsonschema v0.12.0
@@ -52,6 +52,7 @@ require (
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/boombuler/barcode v1.0.1-0.20190219062509-6c824513bacc // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
@@ -93,7 +94,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.19.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/kelseyhightower/envconfig v1.4.0 // indirect
 	github.com/klauspost/compress v1.17.6 // indirect
 	github.com/knadh/koanf/maps v0.1.1 // indirect
 	github.com/lestrrat-go/blackmagic v1.0.2 // indirect
@@ -125,12 +125,13 @@ require (
 	github.com/opencontainers/image-spec v1.1.0 // indirect
 	github.com/openfga/api/proto v0.0.0-20240201160513-05de9d8be3ee // indirect
 	github.com/openfga/go-sdk v0.3.5 // indirect
-	github.com/openfga/language/pkg/go v0.0.0-20240307152633-772cdd8b6a9c // indirect
+	github.com/openfga/language/pkg/go v0.0.0-20240317082346-05173c4e8833 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	github.com/posthog/posthog-go v0.0.0-20240221135834-4944045455b4 // indirect
+	github.com/posthog/posthog-go v0.0.0-20240315130956-036dfa9f3555 // indirect
 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
+	github.com/pquerna/otp v1.4.0 // indirect
 	github.com/prometheus/client_model v0.5.0 // indirect
 	github.com/prometheus/common v0.48.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
@@ -179,7 +180,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.1.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225 // indirect
+	golang.org/x/exp v0.0.0-20240314144324-c7f7c6466f7f // indirect
 	golang.org/x/mod v0.16.0 // indirect
 	golang.org/x/net v0.22.0 // indirect
 	golang.org/x/oauth2 v0.18.0 // indirect
@@ -189,7 +190,7 @@ require (
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.19.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
-	google.golang.org/api v0.169.0 // indirect
+	google.golang.org/api v0.170.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240311173647-c811ad7063a7 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240311173647-c811ad7063a7 // indirect
@@ -203,7 +204,7 @@ require (
 	modernc.org/libc v1.41.0 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
 	modernc.org/memory v1.7.2 // indirect
-	modernc.org/sqlite v1.29.3 // indirect
+	modernc.org/sqlite v1.29.5 // indirect
 	modernc.org/strutil v1.2.0 // indirect
 	modernc.org/token v1.1.0 // indirect
 	nhooyr.io/websocket v1.8.7 // indirect
