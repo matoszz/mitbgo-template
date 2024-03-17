@@ -13,6 +13,7 @@ Config contains the configuration for the datum server
 |[**redis**](#redis)|`object`|||
 |[**tracer**](#tracer)|`object`|||
 |[**sessions**](#sessions)|`object`|||
+|[**ratelimit**](#ratelimit)|`object`|||
 
 **Additional Properties:** not allowed  
 <a name="server"></a>
@@ -34,7 +35,11 @@ Server settings for the echo server
 |**idle\_timeout**|`integer`|IdleTimeout sets the maximum amount of time to wait for the next request when keep-alives are enabled<br/>|no|
 |**read\_header\_timeout**|`integer`|ReadHeaderTimeout sets the amount of time allowed to read request headers<br/>|no|
 |[**tls**](#servertls)|`object`|TLS settings for the server for secure connections<br/>|no|
-|[**cors**](#servercors)|`object`|CORS settings for the server to allow cross origin requests<br/>|no|
+|[**cors**](#servercors)|`object`||no|
+|[**secure**](#serversecure)|`object`||no|
+|[**redirects**](#serverredirects)|`object`||no|
+|[**cacheControl**](#servercachecontrol)|`object`||no|
+|[**mime**](#servermime)|`object`||no|
 
 **Additional Properties:** not allowed  
 <a name="servertls"></a>
@@ -56,23 +61,106 @@ TLS settings for the server for secure connections
 <a name="servercors"></a>
 ### server\.cors: object
 
-CORS settings for the server to allow cross origin requests
+**Properties**
 
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**enabled**|`boolean`|||
+|[**prefixes**](#servercorsprefixes)|`object`|||
+|[**allowOrigins**](#servercorsalloworigins)|`string[]`|||
+|**cookieInsecure**|`boolean`|||
+
+**Additional Properties:** not allowed  
+<a name="servercorsprefixes"></a>
+#### server\.cors\.prefixes: object
+
+**Additional Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+
+<a name="servercorsalloworigins"></a>
+#### server\.cors\.allowOrigins: array
+
+**Items**
+
+**Item Type:** `string`  
+<a name="serversecure"></a>
+### server\.secure: object
 
 **Properties**
 
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
-|[**allow\_origins**](#servercorsallow_origins)|`string[]`|||
-|**cookie\_insecure**|`boolean`|CookieInsecure allows CSRF cookie to be sent to servers that the browser considers<br/>unsecured. Useful for cases where the connection is secured via VPN rather than<br/>HTTPS directly.<br/>||
+|**enabled**|`boolean`|||
+|**xssprotection**|`string`|||
+|**contenttypenosniff**|`string`|||
+|**xframeoptions**|`string`|||
+|**hstspreloadenabled**|`boolean`|||
+|**hstsmaxage**|`integer`|||
+|**contentsecuritypolicy**|`string`|||
+|**referrerpolicy**|`string`|||
+|**cspreportonly**|`boolean`|||
 
 **Additional Properties:** not allowed  
-<a name="servercorsallow_origins"></a>
-#### server\.cors\.allow\_origins: array
+<a name="serverredirects"></a>
+### server\.redirects: object
+
+**Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**enabled**|`boolean`|||
+|[**redirects**](#serverredirectsredirects)|`object`|||
+|**code**|`integer`|||
+
+**Additional Properties:** not allowed  
+<a name="serverredirectsredirects"></a>
+#### server\.redirects\.redirects: object
+
+**Additional Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+
+<a name="servercachecontrol"></a>
+### server\.cacheControl: object
+
+**Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**enabled**|`boolean`|||
+|[**noCacheHeaders**](#servercachecontrolnocacheheaders)|`object`|||
+|[**etagHeaders**](#servercachecontroletagheaders)|`string[]`|||
+
+**Additional Properties:** not allowed  
+<a name="servercachecontrolnocacheheaders"></a>
+#### server\.cacheControl\.noCacheHeaders: object
+
+**Additional Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+
+<a name="servercachecontroletagheaders"></a>
+#### server\.cacheControl\.etagHeaders: array
 
 **Items**
 
 **Item Type:** `string`  
+<a name="servermime"></a>
+### server\.mime: object
+
+**Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**enabled**|`boolean`|||
+|**mimeTypesFile**|`string`|||
+|**defaultContentType**|`string`|||
+
+**Additional Properties:** not allowed  
 <a name="db"></a>
 ## db: object
 
@@ -167,6 +255,19 @@ CORS settings for the server to allow cross origin requests
 |----|----|-----------|--------|
 |**signingKey**|`string`|||
 |**encryptionKey**|`string`|||
+
+**Additional Properties:** not allowed  
+<a name="ratelimit"></a>
+## ratelimit: object
+
+**Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**enabled**|`boolean`|||
+|**limit**|`number`|||
+|**burst**|`integer`|||
+|**expires**|`integer`|||
 
 **Additional Properties:** not allowed  
 

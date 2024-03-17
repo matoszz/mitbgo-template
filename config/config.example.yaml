@@ -7,6 +7,11 @@ db:
     primaryDbSource: ""
     runMigrations: false
     secondaryDbSource: ""
+ratelimit:
+    burst: 0
+    enabled: false
+    expires: 0
+    limit: 0
 redis:
     address: ""
     db: 0
@@ -23,15 +28,39 @@ redis:
     writeTimeout: 0
 refresh_interval: 0
 server:
+    cacheControl:
+        enabled: false
+        etagHeaders: null
+        noCacheHeaders: null
     cors:
-        allow_origins: null
-        cookie_insecure: false
+        allowOrigins: null
+        cookieInsecure: false
+        enabled: false
+        prefixes: null
     debug: false
     dev: false
     idle_timeout: 0
     listen: ""
+    mime:
+        defaultContentType: ""
+        enabled: false
+        mimeTypesFile: ""
     read_header_timeout: 0
     read_timeout: 0
+    redirect:
+        code: 0
+        enabled: false
+        redirects: null
+    secure:
+        contentsecuritypolicy: ""
+        contenttypenosniff: ""
+        cspreportonly: false
+        enabled: false
+        hstsmaxage: 0
+        hstspreloadenabled: false
+        referrerpolicy: ""
+        xframeoptions: ""
+        xssprotection: ""
     shutdown_grace_period: 0
     tls:
         auto_cert: false

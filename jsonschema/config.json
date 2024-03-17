@@ -53,20 +53,20 @@
       "additionalProperties": false,
       "type": "object"
     },
-    "config.CORS": {
+    "cachecontrol.Config": {
       "properties": {
-        "allow_origins": {
-          "$ref": "#/$defs/[]string",
-          "description": "AllowOrigins is a list of allowed origin to indicate whether the response can be shared with\nrequesting code from the given origin"
+        "enabled": {
+          "type": "boolean"
         },
-        "cookie_insecure": {
-          "type": "boolean",
-          "description": "CookieInsecure allows CSRF cookie to be sent to servers that the browser considers\nunsecured. Useful for cases where the connection is secured via VPN rather than\nHTTPS directly."
+        "noCacheHeaders": {
+          "$ref": "#/$defs/map[string]string"
+        },
+        "etagHeaders": {
+          "$ref": "#/$defs/[]string"
         }
       },
       "additionalProperties": false,
-      "type": "object",
-      "description": "CORS settings for the server to allow cross origin requests"
+      "type": "object"
     },
     "config.Server": {
       "properties": {
@@ -107,8 +107,24 @@
           "description": "TLS contains the tls configuration settings"
         },
         "cors": {
-          "$ref": "#/$defs/config.CORS",
+          "$ref": "#/$defs/cors.Config",
           "description": "CORS contains settings to allow cross origin settings and insecure cookies"
+        },
+        "secure": {
+          "$ref": "#/$defs/secure.Config",
+          "description": "Secure contains settings for the secure middleware"
+        },
+        "redirects": {
+          "$ref": "#/$defs/redirect.Config",
+          "description": "Redirect contains settings for the redirect middleware"
+        },
+        "cacheControl": {
+          "$ref": "#/$defs/cachecontrol.Config",
+          "description": "CacheControl contains settings for the cache control middleware"
+        },
+        "mime": {
+          "$ref": "#/$defs/mime.Config",
+          "description": "Mime contains settings for the mime middleware"
         }
       },
       "additionalProperties": false,
@@ -140,6 +156,24 @@
       "additionalProperties": false,
       "type": "object",
       "description": "TLS settings for the server for secure connections"
+    },
+    "cors.Config": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "prefixes": {
+          "$ref": "#/$defs/map[string][]string"
+        },
+        "allowOrigins": {
+          "$ref": "#/$defs/[]string"
+        },
+        "cookieInsecure": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     },
     "entx.Config": {
       "properties": {
@@ -181,6 +215,33 @@
       "required": [
         "primaryDbSource"
       ]
+    },
+    "map[string][]string": {
+      "additionalProperties": {
+        "$ref": "#/$defs/[]string"
+      },
+      "type": "object"
+    },
+    "map[string]string": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "mime.Config": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "mimeTypesFile": {
+          "type": "string"
+        },
+        "defaultContentType": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     },
     "otelx.Config": {
       "properties": {
@@ -239,6 +300,72 @@
       "additionalProperties": false,
       "type": "object"
     },
+    "ratelimit.Config": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "number"
+        },
+        "burst": {
+          "type": "integer"
+        },
+        "expires": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "redirect.Config": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "redirects": {
+          "$ref": "#/$defs/map[string]string"
+        },
+        "code": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "secure.Config": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "xssprotection": {
+          "type": "string"
+        },
+        "contenttypenosniff": {
+          "type": "string"
+        },
+        "xframeoptions": {
+          "type": "string"
+        },
+        "hstspreloadenabled": {
+          "type": "boolean"
+        },
+        "hstsmaxage": {
+          "type": "integer"
+        },
+        "contentsecuritypolicy": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "type": "string"
+        },
+        "cspreportonly": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "sessions.Config": {
       "properties": {
         "signingKey": {
@@ -276,6 +403,10 @@
     "sessions": {
       "$ref": "#/$defs/sessions.Config",
       "description": "Sessions config for user sessions and cookies"
+    },
+    "ratelimit": {
+      "$ref": "#/$defs/ratelimit.Config",
+      "description": "Ratelimit contains the configuration for the rate limiter"
     }
   },
   "additionalProperties": false,
