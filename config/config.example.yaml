@@ -1,59 +1,59 @@
 db:
-    catchTTL: 0
-    databaseName: ""
+    catchTTL: 1000000000
+    databaseName: datum
     debug: false
-    driverName: ""
+    driverName: libsql
     multiWrite: false
-    primaryDbSource: ""
-    runMigrations: false
-    secondaryDbSource: ""
+    primaryDbSource: file:datum.db
+    runMigrations: true
+    secondaryDbSource: file:backup.db
 redis:
-    address: ""
+    address: localhost:6379
     db: 0
-    dialTimeout: 0
-    enabled: false
+    dialTimeout: 5000000000
+    enabled: true
     maxActiveConns: 0
     maxIdleConns: 0
-    maxRetries: 0
+    maxRetries: 3
     minIdleConns: 0
-    name: ""
+    name: datum
     password: ""
     readTimeout: 0
     username: ""
     writeTimeout: 0
-refresh_interval: 0
+refresh_interval: 600000000000
 server:
     cors:
         allow_origins: null
         cookie_insecure: false
     debug: false
     dev: false
-    idle_timeout: 0
-    listen: ""
-    read_header_timeout: 0
-    read_timeout: 0
-    shutdown_grace_period: 0
+    idle_timeout: 30000000000
+    listen: :1337
+    read_header_timeout: 2000000000
+    read_timeout: 15000000000
+    shutdown_grace_period: 10000000000
     tls:
         auto_cert: false
-        cert_file: ""
-        cert_key: ""
+        cert_file: server.crt
+        cert_key: server.key
         config: null
         enabled: false
-    write_timeout: 0
+    write_timeout: 15000000000
 sessions:
-    encryptionKey: ""
-    signingKey: ""
+    encryptionKey: encryptionsecret
+    signingKey: my-signing-secret
 tracer:
     enabled: false
-    environment: ""
+    environment: development
     otlp:
         certificate: ""
         compression: ""
-        endpoint: ""
+        endpoint: localhost:4317
         headers: null
-        insecure: false
-        timeout: 0
-    provider: ""
+        insecure: true
+        timeout: 10000000000
+    provider: stdout
     stdout:
         disableTimestamp: false
-        pretty: false
+        pretty: true
