@@ -12,7 +12,7 @@ steps:
     key: "generate"
     plugins:
       - docker#v5.10.0:
-          image: "ghcr.io/datumforge/base-ci-image:v1.1.3"
+          image: "ghcr.io/datumforge/base-ci-image:v1.1.4"
           command: ["task", "ci"]
           environment: 
             - "GOTOOLCHAIN=auto"
@@ -20,7 +20,7 @@ steps:
     key: "generate_config"
     plugins:
       - docker#v5.10.0:
-          image: "ghcr.io/datumforge/base-ci-image:v1.1.3"
+          image: "ghcr.io/datumforge/base-ci-image:v1.1.4"
           command: ["task", "config:ci"]
           environment: 
             - "GOTOOLCHAIN=auto"
@@ -44,7 +44,7 @@ steps:
       TEST_DB_URL: "libsql://file::memory:?cache=shared"
     plugins:
       - docker#v5.10.0:
-          image: golang:1.22.1
+          image: golang:1.22.2
           command: ["go", "test", "-coverprofile=coverage.out","./..."]
           environment:
             - "TEST_DB_URL"
@@ -60,7 +60,7 @@ steps:
       - "sqlite://file:ent?mode=memory&cache=shared"
     plugins:
       - docker#v5.10.0:
-          image: golang:1.22.1
+          image: golang:1.22.2
           command: ["go", "test", "-coverprofile=coverage.out","./..."]
           environment:
             - "TEST_DB_URL"
@@ -124,7 +124,7 @@ steps:
     artifact_paths: "bin/${APP_NAME}"
     plugins:
       - docker#v5.10.0:
-          image: "golang:1.22.1"
+          image: "golang:1.22.2"
           environment:
             - CGO_ENABLED=0
             - GOOS=linux
@@ -135,7 +135,7 @@ steps:
     artifact_paths: "bin/${APP_NAME}-cli"
     plugins:
       - docker#v5.10.0:
-          image: "golang:1.22.1"
+          image: "golang:1.22.2"
           environment:
             - GOOS=darwin
             - GOARCH=arm64
