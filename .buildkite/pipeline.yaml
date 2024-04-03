@@ -157,7 +157,7 @@ steps:
           - "${IMAGE_REPO}"
           extra_tags:
           - "${IMAGE_TAG}"
-      - datumforge/docker-build#v1.1.0:
+      - datumforge/container-build#v1.1.0:
           dockerfile: docker/Dockerfile
           push: false
           build-args:
