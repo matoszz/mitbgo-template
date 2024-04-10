@@ -10,6 +10,6 @@ server:
 # db settings
 db: 
   debug: true
-  driver_name: libsql
-  primary_db_source: "file:template.db"
-  multi_write: false
+  driverName: libsql
+  primaryDbSource: "file:template.db"
+  multiWrite: false
