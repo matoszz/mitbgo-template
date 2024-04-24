@@ -8,7 +8,7 @@ require (
 	entgo.io/ent v0.13.1
 	github.com/99designs/gqlgen v0.17.45
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2
-	github.com/Yamashou/gqlgenc v0.21.3
+	github.com/Yamashou/gqlgenc v0.21.4
 	github.com/datumforge/datum v0.3.5
 	github.com/datumforge/echo-prometheus/v5 v5.0.0-20231205192725-e697eaa86d58
 	github.com/datumforge/echox v0.0.0-20240312185605-fdb5a150410e
