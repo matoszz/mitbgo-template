@@ -17,8 +17,10 @@ type Noder interface {
 	IsNode()
 }
 
+var todoImplementors = []string{"Todo", "Node"}
+
 // IsNode implements the Node interface check for GQLGen.
-func (n *Todo) IsNode() {}
+func (*Todo) IsNode() {}
 
 var errNodeInvalidID = &NotFoundError{"node"}
 
@@ -81,15 +83,12 @@ func (c *Client) noder(ctx context.Context, table string, id string) (Noder, err
 	case todo.Table:
 		query := c.Todo.Query().
 			Where(todo.ID(id))
-		query, err := query.CollectFields(ctx, "Todo")
-		if err != nil {
-			return nil, err
+		if fc := graphql.GetFieldContext(ctx); fc != nil {
+			if err := query.collectField(ctx, true, graphql.GetOperationContext(ctx), fc.Field, nil, todoImplementors...); err != nil {
+				return nil, err
+			}
 		}
-		n, err := query.Only(ctx)
-		if err != nil {
-			return nil, err
-		}
-		return n, nil
+		return query.Only(ctx)
 	default:
 		return nil, fmt.Errorf("cannot resolve noder from table %q: %w", table, errNodeInvalidID)
 	}
@@ -166,7 +165,7 @@ func (c *Client) noders(ctx context.Context, table string, ids []string) ([]Node
 	case todo.Table:
 		query := c.Todo.Query().
 			Where(todo.IDIn(ids...))
-		query, err := query.CollectFields(ctx, "Todo")
+		query, err := query.CollectFields(ctx, todoImplementors...)
 		if err != nil {
 			return nil, err
 		}
