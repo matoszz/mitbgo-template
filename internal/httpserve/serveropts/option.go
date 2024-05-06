@@ -139,10 +139,18 @@ func WithMiddleware() ServerOption {
 			cors.New(s.Config.Settings.Server.CORS.AllowOrigins), // add cors middleware
 			mime.NewWithConfig(mime.Config{DefaultContentType: echo.MIMEApplicationJSONCharsetUTF8}), // add mime middleware
 			cachecontrol.New(),                 // add cache control middleware
-			ratelimit.DefaultRateLimiter(),     // add ratelimit middleware
 			middleware.Secure(),                // add XSS middleware
 			redirect.NewWithConfig(redirectMW), // add redirect middleware
 		)
+	})
+}
+
+// WithRateLimiter sets up the rate limiter for the server
+func WithRateLimiter() ServerOption {
+	return newApplyFunc(func(s *ServerOptions) {
+		if s.Config.Settings.Ratelimit.Enabled {
+			s.Config.DefaultMiddleware = append(s.Config.DefaultMiddleware, ratelimit.RateLimiterWithConfig(&s.Config.Settings.Ratelimit))
+		}
 	})
 }
 

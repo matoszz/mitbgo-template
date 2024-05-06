@@ -13,6 +13,7 @@ import (
 	"github.com/mcuadros/go-defaults"
 
 	"github.com/datumforge/datum/pkg/cache"
+	"github.com/datumforge/datum/pkg/middleware/ratelimit"
 	"github.com/datumforge/datum/pkg/otelx"
 	"github.com/datumforge/datum/pkg/sessions"
 )
@@ -40,6 +41,9 @@ type Config struct {
 
 	// Sessions config for user sessions and cookies
 	Sessions sessions.Config `json:"sessions" koanf:"sessions"`
+
+	// Ratelimit contains the configuration for the rate limiter
+	Ratelimit ratelimit.Config `json:"ratelimit" koanf:"ratelimit"`
 }
 
 // Server settings for the echo server

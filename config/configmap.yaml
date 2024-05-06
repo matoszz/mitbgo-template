@@ -33,6 +33,8 @@ data:
   DATUM_DB_SECONDARYDBSOURCE: {{ .Values.datum.db.secondaryDbSource | "file:backup.db" }}
   DATUM_DB_CACHETTL: {{ .Values.datum.db.cacheTTL | 1s }}
   DATUM_DB_RUNMIGRATIONS: {{ .Values.datum.db.runMigrations | true }}
+  DATUM_DB_MIGRATIONPROVIDER: {{ .Values.datum.db.migrationProvider | "atlas" }}
+  DATUM_DB_ENABLEHISTORY: {{ .Values.datum.db.enableHistory | false }}
   DATUM_REDIS_ENABLED: {{ .Values.datum.redis.enabled | true }}
   DATUM_REDIS_ADDRESS: {{ .Values.datum.redis.address | "localhost:6379" }}
   DATUM_REDIS_NAME: {{ .Values.datum.redis.name | "datum" }}
@@ -59,3 +61,7 @@ data:
   DATUM_TRACER_OTLP_TIMEOUT: {{ .Values.datum.tracer.otlp.timeout | 10s }}
   DATUM_SESSIONS_SIGNINGKEY: {{ .Values.datum.sessions.signingKey | "my-signing-secret" }}
   DATUM_SESSIONS_ENCRYPTIONKEY: {{ .Values.datum.sessions.encryptionKey | "encryptionsecret" }}
+  DATUM_RATELIMIT_ENABLED: {{ .Values.datum.ratelimit.enabled | false }}
+  DATUM_RATELIMIT_LIMIT: {{ .Values.datum.ratelimit.limit | 10 }}
+  DATUM_RATELIMIT_BURST: {{ .Values.datum.ratelimit.burst | 30 }}
+  DATUM_RATELIMIT_EXPIRES: {{ .Values.datum.ratelimit.expires | 10m }}
