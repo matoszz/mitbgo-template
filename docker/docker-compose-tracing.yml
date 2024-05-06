@@ -10,7 +10,7 @@ services:
 
   # Collector
   otel-collector:
-    image: "otel/opentelemetry-collector:0.99.0"
+    image: "otel/opentelemetry-collector:0.100.0"
     restart: always
     command:
       [
