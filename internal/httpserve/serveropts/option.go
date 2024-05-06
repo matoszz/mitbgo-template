@@ -118,13 +118,6 @@ func WithMiddleware() ServerOption {
 			s.Config.DefaultMiddleware = []echo.MiddlewareFunc{}
 		}
 
-		redirectMW := redirect.Config{
-			Redirects: map[string]string{
-				"/.well-known/change-password": "/v1/forgot-password",
-				"/security.txt":                "/.well-known/security.txt",
-			},
-			Code: 302, // nolint: gomnd
-		}
 		// default middleware
 		s.Config.DefaultMiddleware = append(s.Config.DefaultMiddleware,
 			middleware.RequestID(), // add request id
@@ -138,9 +131,9 @@ func WithMiddleware() ServerOption {
 			echocontext.EchoContextToContextMiddleware(),         // adds echo context to parent
 			cors.New(s.Config.Settings.Server.CORS.AllowOrigins), // add cors middleware
 			mime.NewWithConfig(mime.Config{DefaultContentType: echo.MIMEApplicationJSONCharsetUTF8}), // add mime middleware
-			cachecontrol.New(),                 // add cache control middleware
-			middleware.Secure(),                // add XSS middleware
-			redirect.NewWithConfig(redirectMW), // add redirect middleware
+			cachecontrol.New(),                        // add cache control middleware
+			middleware.Secure(),                       // add XSS middleware
+			redirect.NewWithConfig(redirect.Config{}), // add redirect middleware
 		)
 	})
 }
