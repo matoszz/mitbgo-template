@@ -10,7 +10,7 @@ require (
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2
 	github.com/Yamashou/gqlgenc v0.23.1
 	github.com/datumforge/datum v0.5.2
-	github.com/datumforge/echo-prometheus/v5 v5.0.0-20231205192725-e697eaa86d58
+	github.com/datumforge/echo-prometheus/v5 v5.0.0-20240521143548-d561656e6328
 	github.com/datumforge/echox v0.1.1
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
 	github.com/datumforge/entx v0.1.1
