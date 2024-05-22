@@ -41,7 +41,10 @@ func NewMultiDriverDBClient(ctx context.Context, c entx.Config, l *zap.SugaredLo
 		dbOpts = append(dbOpts, entx.WithSecondaryDB())
 	}
 
-	entConfig := entx.NewDBConfig(c, dbOpts...)
+	entConfig, err := entx.NewDBConfig(c, dbOpts...)
+	if err != nil {
+		return nil, nil, err
+	}
 
 	// Decorates the sql.Driver with entcache.Driver on the primaryDB
 	drvPrimary := entcache.NewDriver(
