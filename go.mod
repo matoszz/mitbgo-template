@@ -13,7 +13,7 @@ require (
 	github.com/datumforge/echo-prometheus/v5 v5.0.0-20240521143548-d561656e6328
 	github.com/datumforge/echox v0.1.1
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
-	github.com/datumforge/entx v0.1.1
+	github.com/datumforge/entx v0.2.0
 	github.com/datumforge/fgax v0.2.1
 	github.com/gorilla/websocket v1.5.1
 	github.com/hashicorp/go-multierror v1.1.1
@@ -175,14 +175,14 @@ require (
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/contrib v1.21.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.49.0 // indirect
-	go.opentelemetry.io/otel v1.26.0 // indirect
+	go.opentelemetry.io/otel v1.27.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.26.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.26.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.26.0 // indirect
 	go.opentelemetry.io/otel/exporters/stdout/stdouttrace v1.26.0 // indirect
-	go.opentelemetry.io/otel/metric v1.26.0 // indirect
+	go.opentelemetry.io/otel/metric v1.27.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.26.0 // indirect
-	go.opentelemetry.io/otel/trace v1.26.0 // indirect
+	go.opentelemetry.io/otel/trace v1.27.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.2.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/exp v0.0.0-20240506185415-9bf2ced13842 // indirect
@@ -207,7 +207,7 @@ require (
 	modernc.org/libc v1.49.3 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
 	modernc.org/memory v1.8.0 // indirect
-	modernc.org/sqlite v1.29.9 // indirect
+	modernc.org/sqlite v1.29.10 // indirect
 	modernc.org/strutil v1.2.0 // indirect
 	modernc.org/token v1.1.0 // indirect
 	nhooyr.io/websocket v1.8.10 // indirect
