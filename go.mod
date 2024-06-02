@@ -30,7 +30,7 @@ require (
 	github.com/redis/go-redis/v9 v9.5.2
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
-	github.com/spf13/viper v1.18.2
+	github.com/spf13/viper v1.19.0
 	github.com/vektah/gqlparser/v2 v2.5.12
 	github.com/wundergraph/graphql-go-tools v1.67.2
 	go.uber.org/zap v1.27.0
@@ -119,7 +119,7 @@ require (
 	github.com/openfga/language/pkg/go v0.0.0-20240508080213-a861f06327b6 // indirect
 	github.com/openfga/openfga v1.5.3 // indirect
 	github.com/ory/dockertest v3.3.5+incompatible // indirect
-	github.com/pelletier/go-toml/v2 v2.1.1 // indirect
+	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/posthog/posthog-go v0.0.0-20240327112532-87b23fe11103 // indirect
