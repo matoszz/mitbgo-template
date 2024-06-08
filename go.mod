@@ -1,6 +1,8 @@
 module github.com/datumforge/go-template
 
-go 1.22.2
+go 1.22.3
+
+toolchain go1.22.4
 
 require (
 	ariga.io/entcache v0.1.0
@@ -14,7 +16,7 @@ require (
 	github.com/datumforge/echox v0.1.1
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
 	github.com/datumforge/entx v0.2.1
-	github.com/datumforge/fgax v0.2.1
+	github.com/datumforge/fgax v0.3.0
 	github.com/gorilla/websocket v1.5.2
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/invopop/jsonschema v0.12.0
@@ -118,10 +120,10 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0 // indirect
 	github.com/opencontainers/runc v1.1.12 // indirect
-	github.com/openfga/api/proto v0.0.0-20240318145204-66b9e5cb403c // indirect
-	github.com/openfga/go-sdk v0.3.6 // indirect
-	github.com/openfga/language/pkg/go v0.0.0-20240508080213-a861f06327b6 // indirect
-	github.com/openfga/openfga v1.5.3 // indirect
+	github.com/openfga/api/proto v0.0.0-20240529184453-5b0b4941f3e0 // indirect
+	github.com/openfga/go-sdk v0.4.0 // indirect
+	github.com/openfga/language/pkg/go v0.0.0-20240603163217-f5fc1d6b5f85 // indirect
+	github.com/openfga/openfga v1.5.4 // indirect
 	github.com/ory/dockertest v3.3.5+incompatible // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -181,7 +183,7 @@ require (
 	golang.org/x/tools v0.22.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
 	google.golang.org/api v0.183.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20240521202816-d264139d666e // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20240528184218-531527333157 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240528184218-531527333157 // indirect
 	google.golang.org/grpc v1.64.0 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
