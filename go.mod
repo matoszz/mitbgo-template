@@ -26,7 +26,7 @@ require (
 	github.com/mcuadros/go-defaults v1.2.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/prometheus/client_golang v1.19.1
-	github.com/ravilushqa/otelgqlgen v0.15.0
+	github.com/ravilushqa/otelgqlgen v0.16.0
 	github.com/redis/go-redis/v9 v9.5.3
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
@@ -158,7 +158,7 @@ require (
 	github.com/xrash/smetrics v0.0.0-20240312152122-5f08fbb34913 // indirect
 	github.com/zclconf/go-cty v1.14.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	go.opentelemetry.io/contrib v1.21.1 // indirect
+	go.opentelemetry.io/contrib v1.27.0 // indirect
 	go.opentelemetry.io/otel v1.27.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.27.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.27.0 // indirect
