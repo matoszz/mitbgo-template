@@ -1,0 +1,25 @@
+default_stages: [pre-commit]
+fail_fast: true
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: jsonschema/DOC.md
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.12.1
+    hooks:
+      - id: yamlfmt
+  - repo: https://github.com/crate-ci/typos
+    rev: typos-dict-v0.11.20
+    hooks:
+      - id: typos
+  - repo: local
+    hooks:
+      - id: format-graphql
+        name: Format GraphQL
+        description: This hook formats GraphQL schemas
+        entry: npx format-graphql@1.4.0 --write=true
+        language: node
+        files: 'query/.*\.graphql$'
+

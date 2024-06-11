@@ -12,11 +12,7 @@ services:
   otel-collector:
     image: "otel/opentelemetry-collector:0.102.1"
     restart: always
-    command:
-      [
-        "--config=/etc/otel-collector-config.yaml",
-        "${OTELCOL_ARGS}"
-      ]
+    command: ["--config=/etc/otel-collector-config.yaml", "${OTELCOL_ARGS}"]
     volumes:
       - ./files/otel-collector-config.yaml:/etc/otel-collector-config.yaml
     ports:
