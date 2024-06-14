@@ -89,8 +89,8 @@ github.com/containerd/continuity v0.4.3/go.mod h1:F6PTNCKepoxEaXLQp3wDAjygEnImnZ
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/cpuguy83/go-md2man/v2 v2.0.4 h1:wfIWP927BUkWJb2NmU/kNDYIBTh/ziUX91+lVfRxZq4=
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
-github.com/datumforge/datum v0.6.4 h1:5c2E0tg/neUPYYDuBQ6hC1RwJlebhX8zS7rIm7+UMhQ=
-github.com/datumforge/datum v0.6.4/go.mod h1:vUgiQrxcHWVM8zrwsRJbbECHCwWBs97zytEg2aK1AjQ=
+github.com/datumforge/datum v0.6.5 h1:1B/aKK63VS+aFwNSaIip3YYy4Lmj3UmGUvOmno0YZNQ=
+github.com/datumforge/datum v0.6.5/go.mod h1:zXhHrjr3XXARla+nSxFz4OSyK4Mhng/qtRSZaf4y1jY=
 github.com/datumforge/echo-prometheus/v5 v5.0.0-20240521143548-d561656e6328 h1:B33HrZsSMcvpxxDNEqRb4rNjtTIBoNFK/tozJlblBgg=
 github.com/datumforge/echo-prometheus/v5 v5.0.0-20240521143548-d561656e6328/go.mod h1:sHgjkPWIRMCfTdYIDnGiUXsBvQ5JMmuzBDThNxrWJkc=
 github.com/datumforge/echox v0.1.1 h1:0R+XIF/eRoDFaXIc9SePdRvda/UPWhkn/RQUuwBCCFM=
@@ -527,8 +527,8 @@ golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPh
 golang.org/x/crypto v0.24.0 h1:mnl8DM0o513X8fdIkmyFE/5hTYxbwYOjDS/+rK6qpRI=
 golang.org/x/crypto v0.24.0/go.mod h1:Z1PMYSOR5nyMcyAVAIQSKCDwalqy85Aqn1x3Ws4L5DM=
 golang.org/x/exp v0.0.0-20190121172915-509febef88a4/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
-golang.org/x/exp v0.0.0-20240604190554-fc45aab8b7f8 h1:LoYXNGAShUG3m/ehNk4iFctuhGX/+R1ZpfJ4/ia80JM=
-golang.org/x/exp v0.0.0-20240604190554-fc45aab8b7f8/go.mod h1:jj3sYF3dwk5D+ghuXyeI3r5MFf+NT2An6/9dOA95KSI=
+golang.org/x/exp v0.0.0-20240613232115-7f521ea00fb8 h1:yixxcjnhBmY0nkL253HFVIm0JsFHwrHdT3Yh6szTnfY=
+golang.org/x/exp v0.0.0-20240613232115-7f521ea00fb8/go.mod h1:jj3sYF3dwk5D+ghuXyeI3r5MFf+NT2An6/9dOA95KSI=
 golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3/go.mod h1:UVdnD1Gm6xHRNCYTkRU2/jEulfH38KcIWyp/GAMgvoE=
 golang.org/x/lint v0.0.0-20190227174305-5b3e6a55c961/go.mod h1:wehouNa3lNwaWXcvxsM5YxQ5yQlVC4a0KAMCusXpPoU=
 golang.org/x/lint v0.0.0-20190313153728-d0100b6bd8b3/go.mod h1:6SW0HCj/g11FgYtHlgUYUwCkIfeOF89ocIRzGO/8vkc=
