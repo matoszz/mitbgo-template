@@ -53,6 +53,32 @@
       "additionalProperties": false,
       "type": "object"
     },
+    "config.Auth": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enabled authentication on the server, not recommended to disable"
+        },
+        "token": {
+          "$ref": "#/$defs/tokens.Config",
+          "description": "Token contains the token config settings for Datum issued tokens"
+        },
+        "supportedProviders": {
+          "$ref": "#/$defs/[]string",
+          "description": "SupportedProviders are the supported oauth providers that have been configured"
+        },
+        "providers": {
+          "$ref": "#/$defs/handlers.OauthProviderConfig",
+          "description": "Providers contains supported oauth2 providers configuration"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "description": "Auth settings including oauth2 providers and datum token configuration"
+    },
     "config.CORS": {
       "properties": {
         "allow_origins": {
@@ -190,6 +216,89 @@
         "primaryDbSource"
       ]
     },
+    "github.ProviderConfig": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecret": {
+          "type": "string"
+        },
+        "clientEndpoint": {
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "#/$defs/[]string"
+        },
+        "redirectUrl": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "clientId",
+        "clientSecret",
+        "scopes",
+        "redirectUrl"
+      ]
+    },
+    "google.ProviderConfig": {
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecret": {
+          "type": "string"
+        },
+        "clientEndpoint": {
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "#/$defs/[]string"
+        },
+        "redirectUrl": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "clientId",
+        "clientSecret",
+        "scopes",
+        "redirectUrl"
+      ]
+    },
+    "handlers.OauthProviderConfig": {
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "RedirectURL is the URL that the OAuth2 client will redirect to after authentication with datum"
+        },
+        "github": {
+          "$ref": "#/$defs/github.ProviderConfig",
+          "description": "Github contains the configuration settings for the Github Oauth Provider"
+        },
+        "google": {
+          "$ref": "#/$defs/google.ProviderConfig",
+          "description": "Google contains the configuration settings for the Google Oauth Provider"
+        },
+        "webauthn": {
+          "$ref": "#/$defs/webauthn.ProviderConfig",
+          "description": "Webauthn contains the configuration settings for the Webauthn Oauth Provider"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "OauthProviderConfig represents the configuration for OAuth providers such as Github and Google"
+    },
+    "map[string]string": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
     "otelx.Config": {
       "properties": {
         "enabled": {
@@ -276,6 +385,83 @@
       },
       "additionalProperties": false,
       "type": "object"
+    },
+    "tokens.Config": {
+      "properties": {
+        "kid": {
+          "type": "string"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "refreshAudience": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "accessDuration": {
+          "type": "integer"
+        },
+        "refreshDuration": {
+          "type": "integer"
+        },
+        "refreshOverlap": {
+          "type": "integer"
+        },
+        "jwksEndpoint": {
+          "type": "string"
+        },
+        "keys": {
+          "$ref": "#/$defs/map[string]string"
+        },
+        "generateKeys": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "kid",
+        "audience",
+        "issuer",
+        "keys"
+      ]
+    },
+    "webauthn.ProviderConfig": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "relyingPartyId": {
+          "type": "string"
+        },
+        "requestOrigin": {
+          "type": "string"
+        },
+        "maxDevices": {
+          "type": "integer"
+        },
+        "enforceTimeout": {
+          "type": "boolean"
+        },
+        "timeout": {
+          "type": "integer"
+        },
+        "debug": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "displayName",
+        "relyingPartyId",
+        "requestOrigin"
+      ]
     }
   },
   "properties": {
@@ -306,6 +492,10 @@
     "ratelimit": {
       "$ref": "#/$defs/ratelimit.Config",
       "description": "Ratelimit contains the configuration for the rate limiter"
+    },
+    "auth": {
+      "$ref": "#/$defs/config.Auth",
+      "description": "Auth contains the authentication token settings and provider(s)"
     }
   },
   "additionalProperties": false,
