@@ -21,7 +21,7 @@ Setup [Taskfile](https://taskfile.dev/installation/) by following the instructio
 
 ## Usage
 
-### Cleanup 
+### Cleanup
 
 1. After cloning the repo, you will need to update all occurrences of `go-template` with your repo name. For convenience, a `task` command is included:
 ```bash
@@ -33,22 +33,22 @@ task clean-template
 1. As the tooling suggests, this is schema driven api development so first up, is defining your schema
 1. Create a new schema by running the following command, replacing `<object>` with your object:
     ```bash
-    task newschema -- <object> 
+    task newschema -- <object>
     ```
     For example, if you wanted to create a user, organization, and members schema you would run:
     ```bash
-    task newschema -- User Organization Member 
+    task newschema -- User Organization Member
     ```
 1. This will generate a file per schema in `internal/ent/schema`
     ```bash
-    tree internal/ent/schema 
+    tree internal/ent/schema
 
     internal/ent/schema
     └── user.go
     └── organization.go
     └── member.go
     ```
-1. You will add your fields, edges, annotations, etc to this file for each schema. See the [ent schema def docs](https://entgo.io/docs/schema-def) for more details. 
+1. You will add your fields, edges, annotations, etc to this file for each schema. See the [ent schema def docs](https://entgo.io/docs/schema-def) for more details.
 
 1. For a simple User, this might look something like :
     ```go
@@ -81,14 +81,14 @@ task clean-template
     ```
 1. This will create a `schema/ent.graphql` file
     ```
-    tree schema 
+    tree schema
 
     schema
     ├── ent.graphql
     └── todo.graphql
     ```
-    As well as generated ent files, including the `openapi.json`: 
-   
+    As well as generated ent files, including the `openapi.json`:
+
 1. This will have created a new `internal/graphapi` directory with a resolver per schema object
     ```
     internal/graphapi

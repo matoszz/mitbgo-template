@@ -1,14 +1,14 @@
 # server settings
-server: 
+server:
   debug: true
   dev: true
 
   # tls settings
   tls:
     enabled: false
-  
+
 # db settings
-db: 
+db:
   debug: true
   driverName: libsql
   primaryDbSource: "file:template.db"

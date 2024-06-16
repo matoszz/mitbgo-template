@@ -19,8 +19,8 @@ go.work
 
 # local dev created files
 *.db
-server.crt 
-server.key 
+server.crt
+server.key
 private_key.pem
 public_key.pem
 # Sendgrid test email folders
@@ -36,7 +36,7 @@ fixtures/emails/*
 *.rar
 *.tar
 
-# Logs 
+# Logs
 *.log
 
 # Editor files
