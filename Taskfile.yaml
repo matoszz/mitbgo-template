@@ -2,18 +2,18 @@ version: '3'
 
 includes:
   cli:
-    taskfile: ./cmd/cli
+    taskfile: ./cmd/cli/Taskfile.yaml
     dir: ./cmd/cli
   docker:
-    taskfile: ./docker
+    taskfile: ./docker/Taskfile.yaml
     dir: ./docker
     aliases: [compose]
   db:
-    taskfile: ./db
+    taskfile: ./db/Taskfile.yaml
     dir: ./db
     aliases: [atlas]
   config:
-    taskfile: ./jsonschema
+    taskfile: ./jsonschema/Taskfile.yaml
 
 env:
   ATLAS_SQLITE_DB_URI: "sqlite://file?mode=memory&_fk=1"
@@ -92,8 +92,7 @@ tasks:
     cmds:
       - task: generate
       - task: config:generate
-      - task: config:docs
-      - task: atlas:all
+      - task: atlas:create
       - task: go
 
   ci:
