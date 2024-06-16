@@ -7,6 +7,7 @@ import (
 	"go.uber.org/zap"
 
 	echodebug "github.com/datumforge/datum/pkg/middleware/debug"
+	"github.com/datumforge/datum/pkg/tokens"
 
 	"github.com/datumforge/go-template/internal/httpserve/config"
 	"github.com/datumforge/go-template/internal/httpserve/route"
@@ -23,6 +24,19 @@ type Server struct {
 
 type handler interface {
 	Routes(*echo.Group)
+}
+
+// NewRouter creates a wrapper router so that the echo server and OAS specification can be generated simultaneously
+func NewRouter() (*route.Router, error) {
+	oas, err := NewOpenAPISpec()
+	if err != nil {
+		return nil, err
+	}
+
+	return &route.Router{
+		Echo: echo.New(),
+		OAS:  oas,
+	}, nil
 }
 
 // AddHandler provides the ability to add additional HTTP handlers that process
@@ -42,7 +56,10 @@ func NewServer(c config.Config, l *zap.SugaredLogger) *Server {
 
 // StartEchoServer creates and starts the echo server with configured middleware and handlers
 func (s *Server) StartEchoServer(ctx context.Context) error {
-	srv := echo.New()
+	srv, err := NewRouter()
+	if err != nil {
+		return err
+	}
 
 	sc := echo.StartConfig{
 		HideBanner:      true,
@@ -52,28 +69,44 @@ func (s *Server) StartEchoServer(ctx context.Context) error {
 		GracefulContext: ctx,
 	}
 
-	srv.Debug = s.config.Settings.Server.Debug
+	srv.Echo.Debug = s.config.Settings.Server.Debug
 
-	if srv.Debug {
-		srv.Use(echodebug.BodyDump(s.logger))
+	if srv.Echo.Debug {
+		srv.Echo.Use(echodebug.BodyDump(s.logger))
 	}
 
 	for _, m := range s.config.DefaultMiddleware {
-		srv.Use(m)
+		srv.Echo.Use(m)
 	}
 
+	// Setup token manager
+	tm, err := tokens.New(s.config.Settings.Auth.Token)
+	if err != nil {
+		return err
+	}
+
+	keys, err := tm.Keys()
+	if err != nil {
+		return err
+	}
+
+	// pass to the REST handlers
+	s.config.Handler.JWTKeys = keys
+
+	srv.Handler = &s.config.Handler
+
 	// Add base routes to the server
-	if err := route.RegisterRoutes(srv, &s.config.Handler); err != nil {
+	if err := route.RegisterRoutes(srv); err != nil {
 		return err
 	}
 
 	// Registers additional routes for the graph endpoints with middleware defined
 	for _, handler := range s.handlers {
-		handler.Routes(srv.Group("", s.config.GraphMiddleware...))
+		handler.Routes(srv.Echo.Group("", s.config.GraphMiddleware...))
 	}
 
 	// Print routes on startup
-	routes := srv.Router().Routes()
+	routes := srv.Echo.Router().Routes()
 	for _, r := range routes {
 		s.logger.Infow("registered route", "route", r.Path(), "method", r.Method())
 	}
@@ -82,9 +115,30 @@ func (s *Server) StartEchoServer(ctx context.Context) error {
 	if s.config.Settings.Server.TLS.Enabled {
 		s.logger.Infow("starting in https mode")
 
-		return sc.StartTLS(srv, s.config.Settings.Server.TLS.CertFile, s.config.Settings.Server.TLS.CertKey)
+		return sc.StartTLS(srv.Echo, s.config.Settings.Server.TLS.CertFile, s.config.Settings.Server.TLS.CertKey)
 	}
 
+	s.logger.Infow(datumBlock)
+
 	// otherwise, start without TLS
-	return sc.Start(srv)
+	return sc.Start(srv.Echo)
 }
+
+var datumBlock = `
+┌───────────────────────────────────────────────────────────────────────────┐
+│                                                                           │
+│                                                                           │
+│                                                                           │
+│               *******               **                                    │
+│              /**////**             /**                                    │
+│              /**    /**  ******   ****** **   ** **********               │
+│              /**    /** //////** ///**/ /**  /**//**//**//**              │
+│              /**    /**  *******   /**  /**  /** /** /** /**              │
+│              /**    **  **////**   /**  /**  /** /** /** /**              │
+│              /*******  //********  //** //****** *** /** /**              │
+│              ///////    ////////    //   ////// ///  //  //               │
+│                                                                           │
+│                                                                           │
+│                                                                           │
+│                                                                           │
+└───────────────────────────────────────────────────────────────────────────┘`

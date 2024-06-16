@@ -5,6 +5,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/datumforge/datum/pkg/cache"
+	"github.com/datumforge/datum/pkg/middleware/ratelimit"
+	"github.com/datumforge/datum/pkg/otelx"
+	"github.com/datumforge/datum/pkg/sessions"
+	"github.com/datumforge/datum/pkg/tokens"
 	"github.com/datumforge/entx"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/env"
@@ -12,10 +17,7 @@ import (
 	"github.com/knadh/koanf/v2"
 	"github.com/mcuadros/go-defaults"
 
-	"github.com/datumforge/datum/pkg/cache"
-	"github.com/datumforge/datum/pkg/middleware/ratelimit"
-	"github.com/datumforge/datum/pkg/otelx"
-	"github.com/datumforge/datum/pkg/sessions"
+	"github.com/datumforge/go-template/internal/httpserve/handlers"
 )
 
 var (
@@ -26,24 +28,32 @@ var (
 type Config struct {
 	// RefreshInterval determines how often to reload the config
 	RefreshInterval time.Duration `json:"refresh_interval" koanf:"refresh_interval" default:"10m"`
-
 	// Server contains the echo server settings
 	Server Server `json:"server" koanf:"server"`
-
 	// DB contains the database configuration for the ent client
 	DB entx.Config `json:"db" koanf:"db"`
-
 	// Redis contains the redis configuration for the key-value store
 	Redis cache.Config `json:"redis" koanf:"redis"`
-
 	// Tracer contains the tracing config for opentelemetry
 	Tracer otelx.Config `json:"tracer" koanf:"tracer"`
-
 	// Sessions config for user sessions and cookies
 	Sessions sessions.Config `json:"sessions" koanf:"sessions"`
-
 	// Ratelimit contains the configuration for the rate limiter
 	Ratelimit ratelimit.Config `json:"ratelimit" koanf:"ratelimit"`
+	// Auth contains the authentication token settings and provider(s)
+	Auth Auth `json:"auth" koanf:"auth"`
+}
+
+// Auth settings including oauth2 providers and datum token configuration
+type Auth struct {
+	// Enabled authentication on the server, not recommended to disable
+	Enabled bool `json:"enabled" koanf:"enabled" default:"true"`
+	// Token contains the token config settings for Datum issued tokens
+	Token tokens.Config `json:"token" koanf:"token" jsonschema:"required" alias:"tokenconfig"`
+	// SupportedProviders are the supported oauth providers that have been configured
+	SupportedProviders []string `json:"supportedProviders" koanf:"supportedProviders"`
+	// Providers contains supported oauth2 providers configuration
+	Providers handlers.OauthProviderConfig `json:"providers" koanf:"providers"`
 }
 
 // Server settings for the echo server
