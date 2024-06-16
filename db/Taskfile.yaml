@@ -1,13 +1,12 @@
 version: '3'
 
-tasks: 
-  create-and-lint:
-    desc: runs the atlas create and lint commands
-    aliases: [all]
-    cmds:
-      - task: create
-      - task: lint
+includes:
+  docker:
+    taskfile: ../docker/Taskfile.yaml
+    dir: ../docker
+    aliases: [compose]
 
+tasks:
   create:
     desc: creates an atlas migration if one is needed based on the ent schema definitions
     cmds:
@@ -20,22 +19,19 @@ tasks:
     desc: lints the pushed migration files
     ignore_error: true
     cmds:
-      - atlas migrate lint --dev-url "sqlite://file?mode=memory&_fk=1" --dir "file://migrations" -w
-
-  migrate:
-    desc: pushes the generated migration files to atlas cloud
-    cmds:
-      - atlas migrate push template --dev-url "sqlite://dev?mode=memory&_fk=1" --dir "file://migrations"
+      - atlas migrate lint --dev-url "docker://postgres/16/dev?search_path=public" --dir "file://migrations" -w
 
   resethash:
     desc: re-sets the checksum created by the atlas package so that a complete migration can be re-created if deleted
     cmds:
       - atlas migrate hash --dir="file://migrations"
+      - atlas migrate hash --dir="file://migrations-goose-sqlite"
+      - atlas migrate hash --dir="file://migrations-goose-postgres"
 
   console:
     desc: launches an interactive terminal to the local template db with some tasty options
     cmds:
-      -  sqlite3 -column -header -box ../template.db
+      - sqlite3 -column -header -box ../template.db
 
   newschema:
     desc: generate a new ent schema from template

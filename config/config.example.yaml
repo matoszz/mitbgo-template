@@ -1,3 +1,40 @@
+auth:
+    enabled: true
+    providers:
+        github:
+            clientEndpoint: http://localhost:17608
+            clientId: ""
+            clientSecret: ""
+            redirectUrl: /v1/github/callback
+            scopes: null
+        google:
+            clientEndpoint: http://localhost:17608
+            clientId: ""
+            clientSecret: ""
+            redirectUrl: /v1/google/callback
+            scopes: null
+        redirectUrl: http://localhost:3001/api/auth/callback/datum
+        webauthn:
+            debug: false
+            displayName: Datum
+            enabled: true
+            enforceTimeout: true
+            maxDevices: 10
+            relyingPartyId: localhost
+            requestOrigin: http://localhost:3001
+            timeout: 60000000000
+    supportedProviders: null
+    token:
+        accessDuration: 3600000000000
+        audience: https://datum.net
+        generateKeys: true
+        issuer: https://auth.datum.net
+        jwksEndpoint: https://api.datum.net/.well-known/jwks.json
+        keys: null
+        kid: ""
+        refreshAudience: ""
+        refreshDuration: 7200000000000
+        refreshOverlap: -900000000000
 db:
     catchTTL: 1000000000
     databaseName: datum

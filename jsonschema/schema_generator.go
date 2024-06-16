@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"strings"
 
 	"github.com/invopop/jsonschema"
 	"github.com/invopop/yaml"
@@ -32,6 +33,8 @@ const (
 // any external packages must use the jsonschema description tags to add comments
 var includedPackages = []string{
 	"./config",
+	"./internal/entdb",
+	"./internal/httpserve/handlers",
 }
 
 // schemaConfig represents the configuration for the schema generator
@@ -125,11 +128,16 @@ func generateSchema(c schemaConfig, structure interface{}) error {
 		if defaultVal == "" {
 			configMapSchema += fmt.Sprintf("  %s: {{ .Values.%s }}\n", k.Key, k.FullPath)
 		} else {
-			if k.Type.Kind() == reflect.String {
+			switch k.Type.Kind() {
+			case reflect.String, reflect.Int64:
+				defaultVal = "\"" + defaultVal + "\"" // add quotes to the string
+			case reflect.Slice:
+				defaultVal = strings.Replace(defaultVal, "[", "", 1)
+				defaultVal = strings.Replace(defaultVal, "]", "", 1)
 				defaultVal = "\"" + defaultVal + "\"" // add quotes to the string
 			}
 
-			configMapSchema += fmt.Sprintf("  %s: {{ .Values.%s | %s }}\n", k.Key, k.FullPath, defaultVal)
+			configMapSchema += fmt.Sprintf("  %s: {{ .Values.%s | default %s }}\n", k.Key, k.FullPath, defaultVal)
 		}
 	}
 

@@ -4,64 +4,95 @@ kind: ConfigMap
 metadata:
   name: {{ include "common.names.fullname" . -}}-config
   {{ $labels := include "common.tplvalues.merge" (dict "values" ( list .Values.api.commonLabels (include "common.labels.standard" .) ) "context" . ) }}
-  labels: {{- include "common.tplvalues.render" ( dict "value" $labels "context" $) | nindent 4 }}   
+  labels: {{- include "common.tplvalues.render" ( dict "value" $labels "context" $) | nindent 4 }}
   {{- if .Values.api.commonAnnotations }}
   {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.api.commonAnnotations ) "context" . ) }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $) | nindent 4 }}
   {{- end }}
 data:
-  DATUM_REFRESH_INTERVAL: {{ .Values.datum.refresh_interval | 10m }}
-  DATUM_SERVER_DEBUG: {{ .Values.datum.server.debug | false }}
-  DATUM_SERVER_DEV: {{ .Values.datum.server.dev | false }}
-  DATUM_SERVER_LISTEN: {{ .Values.datum.server.listen | ":1337" }}
-  DATUM_SERVER_SHUTDOWN_GRACE_PERIOD: {{ .Values.datum.server.shutdown_grace_period | 10s }}
-  DATUM_SERVER_READ_TIMEOUT: {{ .Values.datum.server.read_timeout | 15s }}
-  DATUM_SERVER_WRITE_TIMEOUT: {{ .Values.datum.server.write_timeout | 15s }}
-  DATUM_SERVER_IDLE_TIMEOUT: {{ .Values.datum.server.idle_timeout | 30s }}
-  DATUM_SERVER_READ_HEADER_TIMEOUT: {{ .Values.datum.server.read_header_timeout | 2s }}
-  DATUM_SERVER_TLS_ENABLED: {{ .Values.datum.server.tls.enabled | false }}
-  DATUM_SERVER_TLS_CERT_FILE: {{ .Values.datum.server.tls.cert_file | "server.crt" }}
-  DATUM_SERVER_TLS_CERT_KEY: {{ .Values.datum.server.tls.cert_key | "server.key" }}
-  DATUM_SERVER_TLS_AUTO_CERT: {{ .Values.datum.server.tls.auto_cert | false }}
+  DATUM_REFRESH_INTERVAL: {{ .Values.datum.refresh_interval | default "10m" }}
+  DATUM_SERVER_DEBUG: {{ .Values.datum.server.debug | default false }}
+  DATUM_SERVER_DEV: {{ .Values.datum.server.dev | default false }}
+  DATUM_SERVER_LISTEN: {{ .Values.datum.server.listen | default ":1337" }}
+  DATUM_SERVER_SHUTDOWN_GRACE_PERIOD: {{ .Values.datum.server.shutdown_grace_period | default "10s" }}
+  DATUM_SERVER_READ_TIMEOUT: {{ .Values.datum.server.read_timeout | default "15s" }}
+  DATUM_SERVER_WRITE_TIMEOUT: {{ .Values.datum.server.write_timeout | default "15s" }}
+  DATUM_SERVER_IDLE_TIMEOUT: {{ .Values.datum.server.idle_timeout | default "30s" }}
+  DATUM_SERVER_READ_HEADER_TIMEOUT: {{ .Values.datum.server.read_header_timeout | default "2s" }}
+  DATUM_SERVER_TLS_ENABLED: {{ .Values.datum.server.tls.enabled | default false }}
+  DATUM_SERVER_TLS_CERT_FILE: {{ .Values.datum.server.tls.cert_file | default "server.crt" }}
+  DATUM_SERVER_TLS_CERT_KEY: {{ .Values.datum.server.tls.cert_key | default "server.key" }}
+  DATUM_SERVER_TLS_AUTO_CERT: {{ .Values.datum.server.tls.auto_cert | default false }}
   DATUM_SERVER_CORS_ALLOW_ORIGINS: {{ .Values.datum.server.cors.allow_origins }}
   DATUM_SERVER_CORS_COOKIE_INSECURE: {{ .Values.datum.server.cors.cookie_insecure }}
-  DATUM_DB_DEBUG: {{ .Values.datum.db.debug | false }}
-  DATUM_DB_DATABASENAME: {{ .Values.datum.db.databaseName | "datum" }}
-  DATUM_DB_DRIVERNAME: {{ .Values.datum.db.driverName | "libsql" }}
-  DATUM_DB_MULTIWRITE: {{ .Values.datum.db.multiWrite | false }}
-  DATUM_DB_PRIMARYDBSOURCE: {{ .Values.datum.db.primaryDbSource | "file:datum.db" }}
-  DATUM_DB_SECONDARYDBSOURCE: {{ .Values.datum.db.secondaryDbSource | "file:backup.db" }}
-  DATUM_DB_CACHETTL: {{ .Values.datum.db.cacheTTL | 1s }}
-  DATUM_DB_RUNMIGRATIONS: {{ .Values.datum.db.runMigrations | true }}
-  DATUM_DB_MIGRATIONPROVIDER: {{ .Values.datum.db.migrationProvider | "atlas" }}
-  DATUM_DB_ENABLEHISTORY: {{ .Values.datum.db.enableHistory | false }}
-  DATUM_REDIS_ENABLED: {{ .Values.datum.redis.enabled | true }}
-  DATUM_REDIS_ADDRESS: {{ .Values.datum.redis.address | "localhost:6379" }}
-  DATUM_REDIS_NAME: {{ .Values.datum.redis.name | "datum" }}
+  DATUM_DB_DEBUG: {{ .Values.datum.db.debug | default false }}
+  DATUM_DB_DATABASENAME: {{ .Values.datum.db.databaseName | default "datum" }}
+  DATUM_DB_DRIVERNAME: {{ .Values.datum.db.driverName | default "libsql" }}
+  DATUM_DB_MULTIWRITE: {{ .Values.datum.db.multiWrite | default false }}
+  DATUM_DB_PRIMARYDBSOURCE: {{ .Values.datum.db.primaryDbSource | default "file:datum.db" }}
+  DATUM_DB_SECONDARYDBSOURCE: {{ .Values.datum.db.secondaryDbSource | default "file:backup.db" }}
+  DATUM_DB_CACHETTL: {{ .Values.datum.db.cacheTTL | default "1s" }}
+  DATUM_DB_RUNMIGRATIONS: {{ .Values.datum.db.runMigrations | default true }}
+  DATUM_DB_MIGRATIONPROVIDER: {{ .Values.datum.db.migrationProvider | default "atlas" }}
+  DATUM_DB_ENABLEHISTORY: {{ .Values.datum.db.enableHistory | default false }}
+  DATUM_REDIS_ENABLED: {{ .Values.datum.redis.enabled | default true }}
+  DATUM_REDIS_ADDRESS: {{ .Values.datum.redis.address | default "localhost:6379" }}
+  DATUM_REDIS_NAME: {{ .Values.datum.redis.name | default "datum" }}
   DATUM_REDIS_USERNAME: {{ .Values.datum.redis.username }}
   DATUM_REDIS_PASSWORD: {{ .Values.datum.redis.password }}
-  DATUM_REDIS_DB: {{ .Values.datum.redis.db | 0 }}
-  DATUM_REDIS_DIALTIMEOUT: {{ .Values.datum.redis.dialTimeout | 5s }}
-  DATUM_REDIS_READTIMEOUT: {{ .Values.datum.redis.readTimeout | 0 }}
-  DATUM_REDIS_WRITETIMEOUT: {{ .Values.datum.redis.writeTimeout | 0 }}
-  DATUM_REDIS_MAXRETRIES: {{ .Values.datum.redis.maxRetries | 3 }}
-  DATUM_REDIS_MINIDLECONNS: {{ .Values.datum.redis.minIdleConns | 0 }}
-  DATUM_REDIS_MAXIDLECONNS: {{ .Values.datum.redis.maxIdleConns | 0 }}
-  DATUM_REDIS_MAXACTIVECONNS: {{ .Values.datum.redis.maxActiveConns | 0 }}
-  DATUM_TRACER_ENABLED: {{ .Values.datum.tracer.enabled | false }}
-  DATUM_TRACER_PROVIDER: {{ .Values.datum.tracer.provider | "stdout" }}
-  DATUM_TRACER_ENVIRONMENT: {{ .Values.datum.tracer.environment | "development" }}
-  DATUM_TRACER_STDOUT_PRETTY: {{ .Values.datum.tracer.stdout.pretty | true }}
-  DATUM_TRACER_STDOUT_DISABLETIMESTAMP: {{ .Values.datum.tracer.stdout.disableTimestamp | false }}
-  DATUM_TRACER_OTLP_ENDPOINT: {{ .Values.datum.tracer.otlp.endpoint | "localhost:4317" }}
-  DATUM_TRACER_OTLP_INSECURE: {{ .Values.datum.tracer.otlp.insecure | true }}
+  DATUM_REDIS_DB: {{ .Values.datum.redis.db | default 0 }}
+  DATUM_REDIS_DIALTIMEOUT: {{ .Values.datum.redis.dialTimeout | default "5s" }}
+  DATUM_REDIS_READTIMEOUT: {{ .Values.datum.redis.readTimeout | default "0" }}
+  DATUM_REDIS_WRITETIMEOUT: {{ .Values.datum.redis.writeTimeout | default "0" }}
+  DATUM_REDIS_MAXRETRIES: {{ .Values.datum.redis.maxRetries | default 3 }}
+  DATUM_REDIS_MINIDLECONNS: {{ .Values.datum.redis.minIdleConns | default 0 }}
+  DATUM_REDIS_MAXIDLECONNS: {{ .Values.datum.redis.maxIdleConns | default 0 }}
+  DATUM_REDIS_MAXACTIVECONNS: {{ .Values.datum.redis.maxActiveConns | default 0 }}
+  DATUM_TRACER_ENABLED: {{ .Values.datum.tracer.enabled | default false }}
+  DATUM_TRACER_PROVIDER: {{ .Values.datum.tracer.provider | default "stdout" }}
+  DATUM_TRACER_ENVIRONMENT: {{ .Values.datum.tracer.environment | default "development" }}
+  DATUM_TRACER_STDOUT_PRETTY: {{ .Values.datum.tracer.stdout.pretty | default true }}
+  DATUM_TRACER_STDOUT_DISABLETIMESTAMP: {{ .Values.datum.tracer.stdout.disableTimestamp | default false }}
+  DATUM_TRACER_OTLP_ENDPOINT: {{ .Values.datum.tracer.otlp.endpoint | default "localhost:4317" }}
+  DATUM_TRACER_OTLP_INSECURE: {{ .Values.datum.tracer.otlp.insecure | default true }}
   DATUM_TRACER_OTLP_CERTIFICATE: {{ .Values.datum.tracer.otlp.certificate }}
   DATUM_TRACER_OTLP_HEADERS: {{ .Values.datum.tracer.otlp.headers }}
   DATUM_TRACER_OTLP_COMPRESSION: {{ .Values.datum.tracer.otlp.compression }}
-  DATUM_TRACER_OTLP_TIMEOUT: {{ .Values.datum.tracer.otlp.timeout | 10s }}
-  DATUM_SESSIONS_SIGNINGKEY: {{ .Values.datum.sessions.signingKey | "my-signing-secret" }}
-  DATUM_SESSIONS_ENCRYPTIONKEY: {{ .Values.datum.sessions.encryptionKey | "encryptionsecret" }}
-  DATUM_RATELIMIT_ENABLED: {{ .Values.datum.ratelimit.enabled | false }}
-  DATUM_RATELIMIT_LIMIT: {{ .Values.datum.ratelimit.limit | 10 }}
-  DATUM_RATELIMIT_BURST: {{ .Values.datum.ratelimit.burst | 30 }}
-  DATUM_RATELIMIT_EXPIRES: {{ .Values.datum.ratelimit.expires | 10m }}
+  DATUM_TRACER_OTLP_TIMEOUT: {{ .Values.datum.tracer.otlp.timeout | default "10s" }}
+  DATUM_SESSIONS_SIGNINGKEY: {{ .Values.datum.sessions.signingKey | default "my-signing-secret" }}
+  DATUM_SESSIONS_ENCRYPTIONKEY: {{ .Values.datum.sessions.encryptionKey | default "encryptionsecret" }}
+  DATUM_RATELIMIT_ENABLED: {{ .Values.datum.ratelimit.enabled | default false }}
+  DATUM_RATELIMIT_LIMIT: {{ .Values.datum.ratelimit.limit | default 10 }}
+  DATUM_RATELIMIT_BURST: {{ .Values.datum.ratelimit.burst | default 30 }}
+  DATUM_RATELIMIT_EXPIRES: {{ .Values.datum.ratelimit.expires | default "10m" }}
+  DATUM_AUTH_ENABLED: {{ .Values.datum.auth.enabled | default true }}
+  DATUM_AUTH_TOKEN_KID: {{ .Values.datum.auth.token.kid }}
+  DATUM_AUTH_TOKEN_AUDIENCE: {{ .Values.datum.auth.token.audience | default "https://datum.net" }}
+  DATUM_AUTH_TOKEN_REFRESHAUDIENCE: {{ .Values.datum.auth.token.refreshAudience }}
+  DATUM_AUTH_TOKEN_ISSUER: {{ .Values.datum.auth.token.issuer | default "https://auth.datum.net" }}
+  DATUM_AUTH_TOKEN_ACCESSDURATION: {{ .Values.datum.auth.token.accessDuration | default "1h" }}
+  DATUM_AUTH_TOKEN_REFRESHDURATION: {{ .Values.datum.auth.token.refreshDuration | default "2h" }}
+  DATUM_AUTH_TOKEN_REFRESHOVERLAP: {{ .Values.datum.auth.token.refreshOverlap | default "-15m" }}
+  DATUM_AUTH_TOKEN_JWKSENDPOINT: {{ .Values.datum.auth.token.jwksEndpoint | default "https://api.datum.net/.well-known/jwks.json" }}
+  DATUM_AUTH_TOKEN_KEYS: {{ .Values.datum.auth.token.keys }}
+  DATUM_AUTH_TOKEN_GENERATEKEYS: {{ .Values.datum.auth.token.generateKeys | default true }}
+  DATUM_AUTH_SUPPORTEDPROVIDERS: {{ .Values.datum.auth.supportedProviders }}
+  DATUM_AUTH_PROVIDERS_REDIRECTURL: {{ .Values.datum.auth.providers.redirectUrl | default "http://localhost:3001/api/auth/callback/datum" }}
+  DATUM_AUTH_PROVIDERS_GITHUB_CLIENTID: {{ .Values.datum.auth.providers.github.clientId }}
+  DATUM_AUTH_PROVIDERS_GITHUB_CLIENTSECRET: {{ .Values.datum.auth.providers.github.clientSecret }}
+  DATUM_AUTH_PROVIDERS_GITHUB_CLIENTENDPOINT: {{ .Values.datum.auth.providers.github.clientEndpoint | default "http://localhost:17608" }}
+  DATUM_AUTH_PROVIDERS_GITHUB_SCOPES: {{ .Values.datum.auth.providers.github.scopes }}
+  DATUM_AUTH_PROVIDERS_GITHUB_REDIRECTURL: {{ .Values.datum.auth.providers.github.redirectUrl | default "/v1/github/callback" }}
+  DATUM_AUTH_PROVIDERS_GOOGLE_CLIENTID: {{ .Values.datum.auth.providers.google.clientId }}
+  DATUM_AUTH_PROVIDERS_GOOGLE_CLIENTSECRET: {{ .Values.datum.auth.providers.google.clientSecret }}
+  DATUM_AUTH_PROVIDERS_GOOGLE_CLIENTENDPOINT: {{ .Values.datum.auth.providers.google.clientEndpoint | default "http://localhost:17608" }}
+  DATUM_AUTH_PROVIDERS_GOOGLE_SCOPES: {{ .Values.datum.auth.providers.google.scopes }}
+  DATUM_AUTH_PROVIDERS_GOOGLE_REDIRECTURL: {{ .Values.datum.auth.providers.google.redirectUrl | default "/v1/google/callback" }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_ENABLED: {{ .Values.datum.auth.providers.webauthn.enabled | default true }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_DISPLAYNAME: {{ .Values.datum.auth.providers.webauthn.displayName | default "Datum" }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_RELYINGPARTYID: {{ .Values.datum.auth.providers.webauthn.relyingPartyId | default "localhost" }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_REQUESTORIGIN: {{ .Values.datum.auth.providers.webauthn.requestOrigin | default "http://localhost:3001" }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_MAXDEVICES: {{ .Values.datum.auth.providers.webauthn.maxDevices | default 10 }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_ENFORCETIMEOUT: {{ .Values.datum.auth.providers.webauthn.enforceTimeout | default true }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_TIMEOUT: {{ .Values.datum.auth.providers.webauthn.timeout | default "60s" }}
+  DATUM_AUTH_PROVIDERS_WEBAUTHN_DEBUG: {{ .Values.datum.auth.providers.webauthn.debug | default false }}

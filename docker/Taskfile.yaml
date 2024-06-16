@@ -27,12 +27,12 @@ tasks:
       - task: template
       - task: rover
 
-  all:down: 
+  all:down:
     dir: ..
-    desc: brings down both fga and template server compose environments 
+    desc: brings down both fga and template server compose environments
     cmds:
       - task: template:down
-      
+
   redis:
     dir: ..
     desc: brings up the compose environment for redis
@@ -54,13 +54,13 @@ tasks:
   fga:down:
     dir: ..
     desc: brings the fga compose environment down
-    cmds: 
+    cmds:
       - docker compose -p fga down
 
   fga:open:
     dir: ..
     desc: opens the fga playground in a browser
-    cmds: 
+    cmds:
       - 'open "http://localhost:3000/playground"'
 
   fga:up:

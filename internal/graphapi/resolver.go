@@ -75,7 +75,7 @@ func (r *Resolver) Handler(withPlayground bool) *Handler {
 	)
 
 	srv.AddTransport(transport.Websocket{
-		KeepAlivePingInterval: 10 * time.Second, // nolint: gomnd
+		KeepAlivePingInterval: 10 * time.Second, // nolint: mnd
 		Upgrader: websocket.Upgrader{
 			CheckOrigin: func(r *http.Request) bool {
 				return true
@@ -87,11 +87,11 @@ func (r *Resolver) Handler(withPlayground bool) *Handler {
 	srv.AddTransport(transport.POST{})
 	srv.AddTransport(transport.MultipartForm{})
 
-	srv.SetQueryCache(lru.New(1000)) // nolint:gomnd
+	srv.SetQueryCache(lru.New(1000)) // nolint:mnd
 
 	srv.Use(extension.Introspection{})
 	srv.Use(extension.AutomaticPersistedQuery{
-		Cache: lru.New(100), // nolint:gomnd
+		Cache: lru.New(100), // nolint:mnd
 	})
 	// add transactional db client
 	WithTransactions(srv, r.client)
