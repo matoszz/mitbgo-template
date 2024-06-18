@@ -61,6 +61,7 @@ data:
   DATUM_TRACER_OTLP_TIMEOUT: {{ .Values.datum.tracer.otlp.timeout | default "10s" }}
   DATUM_SESSIONS_SIGNINGKEY: {{ .Values.datum.sessions.signingKey | default "my-signing-secret" }}
   DATUM_SESSIONS_ENCRYPTIONKEY: {{ .Values.datum.sessions.encryptionKey | default "encryptionsecret" }}
+  DATUM_SESSIONS_DOMAIN: {{ .Values.datum.sessions.domain }}
   DATUM_RATELIMIT_ENABLED: {{ .Values.datum.ratelimit.enabled | default false }}
   DATUM_RATELIMIT_LIMIT: {{ .Values.datum.ratelimit.limit | default 10 }}
   DATUM_RATELIMIT_BURST: {{ .Values.datum.ratelimit.burst | default 30 }}

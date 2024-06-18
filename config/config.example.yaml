@@ -85,6 +85,7 @@ server:
         enabled: false
     write_timeout: 15000000000
 sessions:
+    domain: ""
     encryptionKey: encryptionsecret
     signingKey: my-signing-secret
 tracer:
