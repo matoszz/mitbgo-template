@@ -381,6 +381,9 @@
         },
         "encryptionKey": {
           "type": "string"
+        },
+        "domain": {
+          "type": "string"
         }
       },
       "additionalProperties": false,
