@@ -36,7 +36,7 @@ auth:
         refreshDuration: 7200000000000
         refreshOverlap: -900000000000
 db:
-    catchTTL: 1000000000
+    cacheTTL: 1000000000
     databaseName: datum
     debug: false
     driverName: libsql
