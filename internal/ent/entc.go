@@ -13,6 +13,7 @@ import (
 	"entgo.io/contrib/entoas"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
+	"github.com/datumforge/entx/genhooks"
 	"github.com/datumforge/fgax"
 	"github.com/datumforge/fgax/entfga"
 	"github.com/ogen-go/ogen"
@@ -24,6 +25,7 @@ import (
 
 var (
 	graphSchemaDir = "./schema/"
+	// graphQueryDir  = "./query/" // uncomment to enable query generation
 )
 
 func main() {
@@ -89,7 +91,8 @@ func main() {
 		Target:    "./internal/ent/generated",
 		Templates: entgql.AllTemplates,
 		Hooks: []gen.Hook{
-			entx.GenSchema(graphSchemaDir),
+			genhooks.GenSchema(graphSchemaDir),
+			// genhooks.GenQuery(graphQueryDir), // uncomment to enable query generation
 		},
 		Package: "github.com/datumforge/go-template/internal/ent/generated",
 		Features: []gen.Feature{
