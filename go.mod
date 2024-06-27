@@ -11,7 +11,7 @@ require (
 	github.com/Yamashou/gqlgenc v0.23.1
 	github.com/datumforge/datum v0.6.8
 	github.com/datumforge/echo-prometheus/v5 v5.0.0-20240521143548-d561656e6328
-	github.com/datumforge/echox v0.1.1
+	github.com/datumforge/echox v0.1.2
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
 	github.com/datumforge/entx v0.3.0
 	github.com/datumforge/fgax v0.3.1
