@@ -32,7 +32,7 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.19.0
 	github.com/vektah/gqlparser/v2 v2.5.16
-	github.com/wundergraph/graphql-go-tools v1.67.3
+	github.com/wundergraph/graphql-go-tools v1.67.4
 	go.uber.org/zap v1.27.0
 	gocloud.dev v0.37.0
 	golang.org/x/crypto v0.25.0
