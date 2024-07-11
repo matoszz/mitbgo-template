@@ -9,7 +9,7 @@ require (
 	github.com/99designs/gqlgen v0.17.49
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2
 	github.com/Yamashou/gqlgenc v0.23.2
-	github.com/datumforge/datum v0.7.3
+	github.com/datumforge/datum v0.7.4
 	github.com/datumforge/echo-prometheus/v5 v5.0.0-20240521143548-d561656e6328
 	github.com/datumforge/echox v0.1.2
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
@@ -44,7 +44,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.4.0 // indirect
 	github.com/alicebob/gopher-json v0.0.0-20200520072559-a9ecdc9d1d3a // indirect
 	github.com/alicebob/miniredis/v2 v2.33.0 // indirect
-	github.com/alitto/pond v1.9.0 // indirect
+	github.com/alitto/pond v1.9.1 // indirect
 	github.com/dlclark/regexp2 v1.11.0 // indirect
 	github.com/dustinkirkland/golang-petname v0.0.0-20240428194347-eebcea082ee0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
@@ -63,6 +63,7 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
+	github.com/nyaruka/phonenumbers v1.3.6 // indirect
 	github.com/ogen-go/ogen v1.2.1 // indirect
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
 	github.com/yuin/gopher-lua v1.1.1 // indirect
