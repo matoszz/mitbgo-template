@@ -1,6 +1,6 @@
 module github.com/datumforge/go-template
 
-go 1.22.4
+go 1.22.5
 
 require (
 	ariga.io/entcache v0.1.0
@@ -9,12 +9,12 @@ require (
 	github.com/99designs/gqlgen v0.17.49
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2
 	github.com/Yamashou/gqlgenc v0.23.2
-	github.com/datumforge/datum v0.7.4
+	github.com/datumforge/datum v0.7.5
 	github.com/datumforge/echo-prometheus/v5 v5.0.0-20240521143548-d561656e6328
 	github.com/datumforge/echox v0.1.2
 	github.com/datumforge/echozap v0.0.0-20231205193458-b29cc54cd34c
 	github.com/datumforge/entx v0.3.1
-	github.com/datumforge/fgax v0.3.3
+	github.com/datumforge/fgax v0.3.4
 	github.com/gorilla/websocket v1.5.3
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/invopop/jsonschema v0.12.0
@@ -57,13 +57,13 @@ require (
 	github.com/gocarina/gocsv v0.0.0-20240520201108-78e41c74b4b1 // indirect
 	github.com/goccy/go-yaml v1.11.3 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
-	github.com/google/go-github/v62 v62.0.0 // indirect
+	github.com/google/go-github/v63 v63.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/s2a-go v0.1.7 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
-	github.com/nyaruka/phonenumbers v1.3.6 // indirect
+	github.com/nyaruka/phonenumbers v1.4.0 // indirect
 	github.com/ogen-go/ogen v1.2.1 // indirect
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
 	github.com/yuin/gopher-lua v1.1.1 // indirect
@@ -134,7 +134,6 @@ require (
 	github.com/lestrrat-go/jwx/v2 v2.1.0
 	github.com/lestrrat-go/option v1.0.1 // indirect
 	github.com/lib/pq v1.10.9 // indirect
-	github.com/libsql/sqlite-antlr4-parser v0.0.0-20240327125255-dbf53b6cbf06 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
@@ -153,7 +152,7 @@ require (
 	github.com/openfga/api/proto v0.0.0-20240620215129-f5a955a47ae4 // indirect
 	github.com/openfga/go-sdk v0.5.0 // indirect
 	github.com/openfga/language/pkg/go v0.0.0-20240611203201-b6bbf9c4bb3a // indirect
-	github.com/openfga/openfga v1.5.6-0.20240626142017-ffe0bfd2ec0c // indirect
+	github.com/openfga/openfga v1.5.6-0.20240712201354-518606928ded // indirect
 	github.com/ory/dockertest v3.3.5+incompatible // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -179,7 +178,7 @@ require (
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
-	github.com/tursodatabase/libsql-client-go v0.0.0-20240628122535-1c47b26184e8 // indirect
+	github.com/tursodatabase/libsql-client-go v0.0.0-20240715111033-518abad12431 // indirect
 	github.com/urfave/cli/v2 v2.27.2 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
@@ -213,8 +212,8 @@ require (
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
 	google.golang.org/api v0.188.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240701130421-f6361c86f094 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240708141625-4ad9e859172b // indirect
-	google.golang.org/grpc v1.64.1 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240709173604-40e1e62336c5 // indirect
+	google.golang.org/grpc v1.65.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
@@ -223,7 +222,7 @@ require (
 	modernc.org/libc v1.52.1 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
 	modernc.org/memory v1.8.0 // indirect
-	modernc.org/sqlite v1.30.1 // indirect
+	modernc.org/sqlite v1.30.2 // indirect
 	modernc.org/strutil v1.2.0 // indirect
 	modernc.org/token v1.1.0 // indirect
 	nhooyr.io/websocket v1.8.11 // indirect
