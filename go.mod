@@ -5,7 +5,7 @@ go 1.22.5
 require (
 	ariga.io/entcache v0.1.0
 	entgo.io/contrib v0.5.0
-	entgo.io/ent v0.13.1
+	entgo.io/ent v0.14.0
 	github.com/99designs/gqlgen v0.17.49
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2
 	github.com/Yamashou/gqlgenc v0.23.2
