@@ -10,13 +10,11 @@ import (
 	"os"
 
 	"entgo.io/contrib/entgql"
-	"entgo.io/contrib/entoas"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
 	"github.com/datumforge/entx/genhooks"
 	"github.com/datumforge/fgax"
 	"github.com/datumforge/fgax/entfga"
-	"github.com/ogen-go/ogen"
 	"go.uber.org/zap"
 	"gocloud.dev/secrets"
 
@@ -38,41 +36,6 @@ func main() {
 
 	// Ensure the schema directory exists before running entc.
 	_ = os.Mkdir("schema", 0755)
-
-	ex, err := entoas.NewExtension(
-		entoas.SimpleModels(),
-		entoas.Mutations(func(graph *gen.Graph, spec *ogen.Spec) error {
-			spec.SetOpenAPI("3.1.0")
-			spec.SetServers([]ogen.Server{
-				{
-					URL:         "https://api.datum.net/v1",
-					Description: "Datum Production API Endpoint",
-				},
-				{
-					URL:         "http://localhost:17608/v1",
-					Description: "http localhost endpoint for testing purposes",
-				}})
-			spec.Info.SetTitle("Datum OpenAPI 3.1.0 Specifications").
-				SetDescription("Programmatic interfaces for interacting with Datum Services").
-				SetVersion("1.0.1")
-			spec.Info.SetContact(&ogen.Contact{
-				Name:  "Datum Support",
-				URL:   "https://datum.net/support",
-				Email: "support@datum.net",
-			})
-			spec.Info.SetLicense(&ogen.License{
-				Name: "Apache 2.0",
-				URL:  "https://www.apache.org/licenses/LICENSE-2.0",
-			})
-			spec.Info.SetTermsOfService("https://datum.net/tos")
-
-			return nil
-		}),
-	)
-
-	if err != nil {
-		log.Fatalf("creating entoas extension: %v", err)
-	}
 
 	gqlExt, err := entgql.NewExtension(
 		// Tell Ent to generate a GraphQL schema for
@@ -121,8 +84,7 @@ func main() {
 		),
 		entc.Extensions(
 			gqlExt,
-			ex,
-			entfga.NewFGAExtension(
+			entfga.New(
 				entfga.WithSoftDeletes(),
 			),
 		)); err != nil {
