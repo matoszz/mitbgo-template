@@ -22,7 +22,6 @@ import (
 	"github.com/datumforge/datum/pkg/middleware/mime"
 	"github.com/datumforge/datum/pkg/middleware/ratelimit"
 	"github.com/datumforge/datum/pkg/middleware/redirect"
-	"github.com/datumforge/datum/pkg/middleware/sentry"
 	"github.com/datumforge/datum/pkg/sessions"
 )
 
@@ -125,11 +124,10 @@ func WithMiddleware() ServerOption {
 			middleware.LoggerWithConfig(middleware.LoggerConfig{
 				Format: "remote_ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}, session=${header:Set-Cookie}, host=${host}, referer=${referer}, user_agent=${user_agent}, route=${route}, path=${path}, auth=${header:Authorization}\n",
 			}),
-			sentry.New(),
-			echoprometheus.MetricsMiddleware(),                   // add prometheus metrics
-			echozap.ZapLogger(s.Config.Logger.Desugar()),         // add zap logger, middleware requires the "regular" zap logger
-			echocontext.EchoContextToContextMiddleware(),         // adds echo context to parent
-			cors.New(s.Config.Settings.Server.CORS.AllowOrigins), // add cors middleware
+			echoprometheus.MetricsMiddleware(),                                                       // add prometheus metrics
+			echozap.ZapLogger(s.Config.Logger.Desugar()),                                             // add zap logger, middleware requires the "regular" zap logger
+			echocontext.EchoContextToContextMiddleware(),                                             // adds echo context to parent
+			cors.New(s.Config.Settings.Server.CORS.AllowOrigins),                                     // add cors middleware
 			mime.NewWithConfig(mime.Config{DefaultContentType: echo.MIMEApplicationJSONCharsetUTF8}), // add mime middleware
 			cachecontrol.New(),                        // add cache control middleware
 			middleware.Secure(),                       // add XSS middleware
