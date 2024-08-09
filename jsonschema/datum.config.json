@@ -442,8 +442,8 @@
         "relyingPartyId": {
           "type": "string"
         },
-        "requestOrigin": {
-          "type": "string"
+        "requestOrigins": {
+          "$ref": "#/$defs/[]string"
         },
         "maxDevices": {
           "type": "integer"
@@ -463,7 +463,7 @@
       "required": [
         "displayName",
         "relyingPartyId",
-        "requestOrigin"
+        "requestOrigins"
       ]
     }
   },
