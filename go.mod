@@ -154,7 +154,7 @@ require (
 	github.com/openfga/api/proto v0.0.0-20240807201305-c96ec773cae9 // indirect
 	github.com/openfga/go-sdk v0.5.0 // indirect
 	github.com/openfga/language/pkg/go v0.2.0-beta.0 // indirect
-	github.com/openfga/openfga v1.5.8 // indirect
+	github.com/openfga/openfga v1.5.9 // indirect
 	github.com/ory/dockertest v3.3.5+incompatible // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
